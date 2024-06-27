@@ -27,7 +27,7 @@ def start_fixing(screen):
 	civic_fix_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 5))
 
 
-	""" Fixing game loop """
+	""" Game loop """
 	running = True
 	while running:
 		for event in pygame.event.get():
@@ -35,15 +35,18 @@ def start_fixing(screen):
 				pygame.quit()
 				exit()
 
+
 		# Update the frame index
 		now = pygame.time.get_ticks()
 		if now - last_update > frame_delay:
 			current_frame = (current_frame + 1) % frame_count
 			last_update = now
 
+
 		screen.fill((0, 0, 0))
 
 		screen.blit(frames[current_frame], civic_fix_rect.topleft)
+
 
 		pygame.display.flip()
 

@@ -42,9 +42,11 @@ def start_beginning(screen):
 
 		screen.fill((0, 0, 0))
 
+
 		# Display images at their predefined position
 		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
 		screen.blit(continue_arrow,continue_arrow_rect.topleft)
+
 
 		if is_hovered(continue_arrow_rect):
 			if not hovered_new:
@@ -55,6 +57,7 @@ def start_beginning(screen):
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_new)
 		else:
 			hovered_new = False
+
 
 		# Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line
 		screen.blit(beginning_text_surface, beginning_text_rect)
