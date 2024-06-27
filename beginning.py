@@ -4,19 +4,25 @@ from game_functions import text_wrap
 
 def start_beginning(screen):
 
-	# Level name text settings
+	""" Level name font and text settings """
 	font = pygame.font.Font(None, 40)
 	beginning_text_surface = font.render("A New Beginning", True, (CYAN))
 	beginning_text_rect = beginning_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
 
 
-	# Dialogue text settings
+	""" Dialogue text settings """
 	font = pygame.font.SysFont('Arial', 20)
 	beginning_dialogue_1 = "You're a newly-graduated college student. After years of boring schoolwork, watching clichéd car racing movies, and playing similarly-themed racing games, you decided it was time to go out and see if you could turn those car racing fantasies into reality. As a graduation gift, your uncle gives you a gently-used 1997 Honda Civic."
 
+	beginning_dialogue_2 = "You decide that a few changes need to be made so you begin to get your hands dirty..."
 
+
+	""" Images and position settings """
 	garage_with_civic = pygame.image.load("assets/garage_with_civic.png")
-	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.6))
+	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
+
+	continue_arrow_image = pygame.image.load("assets/continue_arrow.png")
+	continue_arrow_image_rect = continue_arrow_image.get_rect(bottomright=(screen.get_width(), screen.get_height()))
 
 
 	""" Beginning game loop """
@@ -29,11 +35,15 @@ def start_beginning(screen):
 
 		screen.fill((0, 0, 0))
 
-		screen.blit(beginning_text_surface, beginning_text_rect)
+		# Display images at their predefined position
 		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
+		screen.blit(continue_arrow_image, continue_arrow_image_rect.topleft)
 
+		# Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line
+		screen.blit(beginning_text_surface, beginning_text_rect)
 		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		
+		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3.5), font, WHITE, screen.get_width() - screen.get_width() // 5)
+
 		pygame.display.flip()
 
 	pygame.quit()

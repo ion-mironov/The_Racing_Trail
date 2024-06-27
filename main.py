@@ -1,7 +1,7 @@
 import pygame
 
 from parameters import *
-from game_functions import is_hovered, draw_shimmer
+from game_functions import *
 from random_events import *
 from animations import *
 import beginning
@@ -11,7 +11,6 @@ import beginning
 pygame.init()
 
 
-
 """ Game states """
 MAIN_MENU = "main_menu"
 RACING = "racing"
@@ -19,17 +18,9 @@ UPGRADING = "upgrading"
 EVENT = "event"
 state = MAIN_MENU
 
-# Initialize shimmer progress
-shimmer_progress_new = 0
-shimmer_progress_load = 0
-shimmer_progress_exit = 0
 
-# Check if cursor is over images (used to reset hover effect)
-hovered_new = False
-hovered_load = False
-hovered_exit = False
 
-# =========================================================================== #
+# ============================================================================================= #
 # Main game loop
 running = True
 while running:
