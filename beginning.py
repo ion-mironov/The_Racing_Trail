@@ -1,6 +1,8 @@
 import pygame
+
 from parameters import *
-from game_functions import text_wrap
+from game_functions import *
+import fixing
 
 def start_beginning(screen):
 
@@ -21,8 +23,8 @@ def start_beginning(screen):
 	garage_with_civic = pygame.image.load("assets/garage_with_civic.png")
 	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
 
-	continue_arrow_image = pygame.image.load("assets/continue_arrow.png")
-	continue_arrow_image_rect = continue_arrow_image.get_rect(bottomright=(screen.get_width(), screen.get_height()))
+	continue_arrow = pygame.image.load("assets/continue_arrow.png")
+	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width(), screen.get_height()))
 
 
 	""" Beginning game loop """
@@ -32,12 +34,27 @@ def start_beginning(screen):
 			if event.type == pygame.QUIT:
 				pygame.quit()
 				exit()
+			
+			elif event.type == pygame.MOUSEBUTTONUP:
+				if event.button == 1:
+					if is_hovered(continue_arrow_rect):
+						fixing.start_fixing(screen)
 
 		screen.fill((0, 0, 0))
 
 		# Display images at their predefined position
 		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
-		screen.blit(continue_arrow_image, continue_arrow_image_rect.topleft)
+		screen.blit(continue_arrow,continue_arrow_rect.topleft)
+
+		if is_hovered(continue_arrow_rect):
+			if not hovered_new:
+				shimmer_progress_new = 0
+				hovered_new = True
+			if shimmer_progress_new < 1:
+				shimmer_progress_new += 0.01
+				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_new)
+		else:
+			hovered_new = False
 
 		# Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line
 		screen.blit(beginning_text_surface, beginning_text_rect)
