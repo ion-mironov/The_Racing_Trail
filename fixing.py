@@ -37,10 +37,10 @@ def start_fixing(screen):
 
 	# Animation state
 	animation_completed = False
+	animation_end_time = 1000  # Delay in milliseconds (3 seconds) after animation completion to display text
 
 
 
-	""" Game loop """
 	running = True
 	while running:
 		for event in pygame.event.get():
@@ -48,14 +48,7 @@ def start_fixing(screen):
 				pygame.quit()
 				exit()
 
-
-		# Update the frame index in a continuous loop
-		# now = pygame.time.get_ticks()
-		# if now - last_update > frame_delay:
-		# 	current_frame = (current_frame + 1) % frame_count
-		# 	last_update = now
-
-		# Update the frame index and stop once the final frame is displayed
+		# Update the frame animation index and stop once the final frame is displayed
 		now = pygame.time.get_ticks()
 		if now - last_update > frame_delay and not animation_completed:
 			current_frame += 1
@@ -65,16 +58,16 @@ def start_fixing(screen):
 			if current_frame == frame_count - 1:
 				animation_completed = True
 
-
 		screen.fill((0, 0, 0))
 
-
+		# Display animation
 		if current_frame < frame_count:
 			screen.blit(frames[current_frame], civic_fix_rect.topleft)
 
+		# Display text once animation final frame has displayed
 		if animation_completed:
-			screen.blit(you_tried_text_surface, you_tried_text_rect)
-
+			if now - last_update > animation_end_time:
+				screen.blit(you_tried_text_surface, you_tried_text_rect)
 
 		pygame.display.flip()
 
