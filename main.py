@@ -7,7 +7,6 @@ from random_events import *
 import beginning
 
 
-""" Initialize Pygame """
 pygame.init()
 
 
@@ -34,7 +33,6 @@ RACING = "racing"
 UPGRADING = "upgrading"
 EVENT = "event"
 state = MAIN_MENU
-
 
 
 # ============================================================================================= #

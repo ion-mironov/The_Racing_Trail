@@ -109,7 +109,7 @@ def start_fixing(screen):
 					shimmer_progress_new = 0
 					hovered_new = True
 				if shimmer_progress_new < 1:
-					shimmer_progress_new += 0.01
+					shimmer_progress_new += 0.006
 					draw_shimmer(screen, continue_arrow_rect, shimmer_progress_new)
 			else:
 				hovered_new = False

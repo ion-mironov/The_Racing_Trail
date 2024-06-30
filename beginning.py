@@ -4,6 +4,7 @@ from game_functions import *
 from parameters import *
 import fixing
 
+
 def start_beginning(screen):
 
 	# Dialogue text settings
