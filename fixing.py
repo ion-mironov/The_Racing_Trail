@@ -5,7 +5,7 @@ from game_functions import *
 from parameters import *
 
 
-
+# GIF animation function ============================================= #
 def load_frames(folder, prefix):
 	frames = []
 	for filename in sorted(os.listdir(folder)):
@@ -15,7 +15,7 @@ def load_frames(folder, prefix):
 	return frames
 
 
-
+#  Fixing Level animation, text, and game loop ======================= #
 def start_fixing(screen):
 
 	# Define image frames for animation
@@ -24,7 +24,7 @@ def start_fixing(screen):
 	current_frame = 0											# Start animation with the very first frame
 
 	# Timing for frame updates
-	frame_delay = 100	# milliseconds
+	frame_delay = 100   # milliseconds
 	last_update = pygame.time.get_ticks()
 
 	# Get rect from first GIF frame to position the animation
@@ -35,18 +35,28 @@ def start_fixing(screen):
 	you_tried_text_surface = font.render("Well, at least you tried...", True, WHITE)
 	you_tried_text_rect = you_tried_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.7))
 
+	you_fixed_it_text_surface = font.render("But, now you fixed it!", True, WHITE)
+	you_fixed_it_text_rect = you_fixed_it_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.4))
+
 	# Animation state
 	animation_completed = False
-	animation_end_time = 1000  # Delay in milliseconds (3 seconds) after animation completion to display text
+	you_tried_displayed = False
+	text_displayed_time = 0
+
+	# Delays
+	animation_end_time = 1000	# milliseconds
+	second_text_delay = 1000	# milliseconds
 
 
 
+	""" Main loop """
 	running = True
 	while running:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				pygame.quit()
 				exit()
+
 
 		# Update the frame animation index and stop once the final frame is displayed
 		now = pygame.time.get_ticks()
@@ -57,17 +67,26 @@ def start_fixing(screen):
 			# Check if the animation has completed one cycle
 			if current_frame == frame_count - 1:
 				animation_completed = True
+				text_displayed_time = pygame.time.get_ticks()  # Record the time when the animation completes
+
 
 		screen.fill((0, 0, 0))
+
 
 		# Display animation
 		if current_frame < frame_count:
 			screen.blit(frames[current_frame], civic_fix_rect.topleft)
 
-		# Display text once animation final frame has displayed
+		# Display text once animation final frame has displayed and delay time has passed
 		if animation_completed:
-			if now - last_update > animation_end_time:
+			if now - text_displayed_time > animation_end_time:
 				screen.blit(you_tried_text_surface, you_tried_text_rect)
+				you_tried_displayed = True
+		
+		# Display the second text after the first text
+		if you_tried_displayed and now - text_displayed_time > animation_end_time + second_text_delay:
+			screen.blit(you_fixed_it_text_surface, you_fixed_it_text_rect)
+
 
 		pygame.display.flip()
 
