@@ -1,9 +1,9 @@
 import pygame
 
-from parameters import *
-from game_functions import *
-from random_events import *
 from animations import *
+from game_functions import *
+from parameters import *
+from random_events import *
 import beginning
 
 
@@ -11,7 +11,24 @@ import beginning
 pygame.init()
 
 
-""" Game states """
+# Main Menu images
+background = pygame.image.load("assets/background.png")
+background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+
+main_title_image = pygame.image.load("assets/main_title_image.png")
+title_rect = main_title_image.get_rect(center=(WIDTH // 2, HEIGHT // 5))
+
+new_game_image = pygame.image.load("assets/new_game_image.png")
+new_game_rect = new_game_image.get_rect(center=(WIDTH // 2, HEIGHT // 1.5))
+
+load_game_image = pygame.image.load("assets/load_game_image.png")
+load_game_rect = load_game_image.get_rect(center=(WIDTH // 2, HEIGHT // 1.3))
+
+exit_game_image = pygame.image.load("assets/exit_game_image.png")
+exit_game_rect = exit_game_image.get_rect(center=(WIDTH // 2, HEIGHT // 1.15))
+
+
+# Game states
 MAIN_MENU = "main_menu"
 RACING = "racing"
 UPGRADING = "upgrading"
@@ -21,7 +38,7 @@ state = MAIN_MENU
 
 
 # ============================================================================================= #
-# Main game loop
+""" Main game loop """
 running = True
 while running:
 	for event in pygame.event.get():
@@ -50,7 +67,7 @@ while running:
 		screen.blit(exit_game_image, exit_game_rect)			# Display Exit Game text image
 
 
-		# New Game button shimmer
+		# New Game button shimmer effect
 		if is_hovered(new_game_rect):
 			if not hovered_new:
 				shimmer_progress_new = 0
@@ -62,7 +79,7 @@ while running:
 			hovered_new = False
 
 
-		# Load Game button shimmer
+		# Load Game button shimmer effect
 		if is_hovered(load_game_rect):
 			if not hovered_load:
 				shimmer_progress_load = 0
@@ -74,7 +91,7 @@ while running:
 			hovered_load = False
 
 
-		# Exit Game button shimmer
+		# Exit Game button shimmer effect
 		if is_hovered(exit_game_rect):
 			if not hovered_exit:
 				shimmer_progress_exit = 0

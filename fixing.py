@@ -3,6 +3,7 @@ import pygame
 
 from game_functions import *
 from parameters import *
+import cruising
 
 
 # GIF animation function ============================================= #
@@ -27,25 +28,32 @@ def start_fixing(screen):
 	frame_delay = 100   # milliseconds
 	last_update = pygame.time.get_ticks()
 
-	# Get rect from first GIF frame to position the animation
+	# Get rect from first GIF frame to position animation
 	civic_fix_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 5))
 
-	# Font settings for text
+
+	# Dialogue text settings
 	font = pygame.font.SysFont('Arial', 24)
 	you_tried_text_surface = font.render("Well, at least you tried...", True, WHITE)
 	you_tried_text_rect = you_tried_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.7))
 
-	you_fixed_it_text_surface = font.render("But, now you fixed it!", True, WHITE)
-	you_fixed_it_text_rect = you_fixed_it_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.4))
+	you_fixed_it_text_surface = font.render("But, after a few hours of swearing and spending what little money you had, you finally got your car to your liking.", True, WHITE)
+	you_fixed_it_text_rect = you_fixed_it_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.1))
 
-	# Animation state
+
+	# Continue arrow settings
+	continue_arrow = pygame.image.load("assets/continue_arrow.png")
+	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
+
+
+	# Animation states
 	animation_completed = False
 	you_tried_displayed = False
 	text_displayed_time = 0
 
-	# Delays
+	# Time Delays
 	animation_end_time = 1000	# milliseconds
-	second_text_delay = 1000	# milliseconds
+	second_text_delay = 1500	# milliseconds
 
 
 
@@ -56,6 +64,13 @@ def start_fixing(screen):
 			if event.type == pygame.QUIT:
 				pygame.quit()
 				exit()
+			
+			# Continue arrow button
+			elif event.type == pygame.MOUSEBUTTONUP:
+				if event.button == 1:
+					if is_hovered(continue_arrow_rect):
+						# cruising.cruising_animation(screen)
+						pass
 
 
 		# Update the frame animation index and stop once the final frame is displayed
@@ -77,15 +92,27 @@ def start_fixing(screen):
 		if current_frame < frame_count:
 			screen.blit(frames[current_frame], civic_fix_rect.topleft)
 
-		# Display text once animation final frame has displayed and delay time has passed
+		# Display dialogue text once the animation's final frame has displayed and first time-delay has passed
 		if animation_completed:
 			if now - text_displayed_time > animation_end_time:
 				screen.blit(you_tried_text_surface, you_tried_text_rect)
 				you_tried_displayed = True
 		
-		# Display the second text after the first text
+		# Display the second dialogue text after the first has displayed and second time-delay has passed
 		if you_tried_displayed and now - text_displayed_time > animation_end_time + second_text_delay:
 			screen.blit(you_fixed_it_text_surface, you_fixed_it_text_rect)
+			screen.blit(continue_arrow,continue_arrow_rect.topleft)
+
+			""" Continue arrow shimmer effect """
+			if is_hovered(continue_arrow_rect):
+				if not hovered_new:
+					shimmer_progress_new = 0
+					hovered_new = True
+				if shimmer_progress_new < 1:
+					shimmer_progress_new += 0.01
+					draw_shimmer(screen, continue_arrow_rect, shimmer_progress_new)
+			else:
+				hovered_new = False
 
 
 		pygame.display.flip()
