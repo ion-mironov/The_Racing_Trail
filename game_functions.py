@@ -22,18 +22,6 @@ def text_wrap(screen, text, position, font, color, max_width):
 
 
 # ========================================================================================================= #
-""" Shimmer function """
-
-# Initialize shimmer progress
-shimmer_progress_new = 0
-shimmer_progress_load = 0
-shimmer_progress_exit = 0
-
-# Check if cursor is over images (used to reset hover effect)
-hovered_new = False
-hovered_load = False
-hovered_exit = False
-
 # Check if mouse cursor hovers over image to initiate shimmer effect
 def is_hovered(rect):
 	mouse_pos = pygame.mouse.get_pos()

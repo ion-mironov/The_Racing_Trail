@@ -35,6 +35,17 @@ EVENT = "event"
 state = MAIN_MENU
 
 
+""" Shimmer function """
+# Initialize shimmer progress
+shimmer_progress_new = 0
+shimmer_progress_load = 0
+shimmer_progress_exit = 0
+
+# Check if cursor is over images (used to reset hover effect)
+hovered_new = False
+hovered_load = False
+hovered_exit = False
+
 # ============================================================================================= #
 """ Main game loop """
 running = True
@@ -45,6 +56,7 @@ while running:
 			pygame.quit()
 			exit()
 
+		# Continue arrow button
 		elif event.type == pygame.MOUSEBUTTONUP:
 			if event.button == 1:
 				if is_hovered(new_game_rect):
@@ -65,7 +77,7 @@ while running:
 		screen.blit(exit_game_image, exit_game_rect)			# Display Exit Game text image
 
 
-		# New Game button shimmer effect
+		# 'New Game' button shimmer effect
 		if is_hovered(new_game_rect):
 			if not hovered_new:
 				shimmer_progress_new = 0
@@ -77,7 +89,7 @@ while running:
 			hovered_new = False
 
 
-		# Load Game button shimmer effect
+		# 'Load Game' button shimmer effect
 		if is_hovered(load_game_rect):
 			if not hovered_load:
 				shimmer_progress_load = 0
@@ -89,7 +101,7 @@ while running:
 			hovered_load = False
 
 
-		# Exit Game button shimmer effect
+		# 'Exit Game' button shimmer effect
 		if is_hovered(exit_game_rect):
 			if not hovered_exit:
 				shimmer_progress_exit = 0

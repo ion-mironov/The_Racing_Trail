@@ -16,8 +16,16 @@ def load_frames(folder, prefix):
 	return frames
 
 
-#  Fixing Level animation, text, and game loop ======================= #
+#  'Fixing' level animation, text, and game loop ======================= #
 def start_fixing(screen):
+
+	""" Shimmer function """
+	# Initialize shimmer progress
+	shimmer_progress_continue = 0
+
+	# Check if cursor is over 'continue' arrow (used to reset hover effect)
+	hovered_continue = False
+
 
 	# Define image frames for animation
 	frames = load_frames("assets/civic_fix/", "frame_")			# Load all frames for the animation from specified folder; filenames start with 'frame_'
@@ -41,17 +49,17 @@ def start_fixing(screen):
 	you_fixed_it_text_rect = you_fixed_it_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.1))
 
 
-	# Continue arrow settings
+	# 'Continue' arrow settings
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
 
-	# Animation states
+	# Animation states used to determine when 'fixing' animation and dialogue text display
 	animation_completed = False
 	you_tried_displayed = False
 	text_displayed_time = 0
 
-	# Time Delays
+	# Time delays for when to display dialogue text after 'fixing' animation
 	animation_end_time = 1000	# milliseconds
 	second_text_delay = 1500	# milliseconds
 
@@ -69,8 +77,9 @@ def start_fixing(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						# cruising.cruising_animation(screen)
-						pass
+						cruising.start_cruising(screen)
+
+		screen.fill((0, 0, 0))
 
 
 		# Update the frame animation index and stop once the final frame is displayed
@@ -84,8 +93,6 @@ def start_fixing(screen):
 				animation_completed = True
 				text_displayed_time = pygame.time.get_ticks()  # Record the time when the animation completes
 
-
-		screen.fill((0, 0, 0))
 
 
 		# Display animation
@@ -105,15 +112,14 @@ def start_fixing(screen):
 
 			""" Continue arrow shimmer effect """
 			if is_hovered(continue_arrow_rect):
-				if not hovered_new:
-					shimmer_progress_new = 0
-					hovered_new = True
-				if shimmer_progress_new < 1:
-					shimmer_progress_new += 0.006
-					draw_shimmer(screen, continue_arrow_rect, shimmer_progress_new)
+				if not hovered_continue:
+					shimmer_progress_continue = 0
+					hovered_continue = True
+				if shimmer_progress_continue < 1:
+					shimmer_progress_continue += 0.003
+					draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
 			else:
-				hovered_new = False
-
+				hovered_continue = False
 
 		pygame.display.flip()
 

@@ -5,7 +5,17 @@ from parameters import *
 import fixing
 
 
+
+# 'Beginning' level images, dialogue text, and game loop
 def start_beginning(screen):
+
+	""" Shimmer function """
+	# Initialize shimmer progress
+	shimmer_progress_continue = 0
+
+	# Check if cursor is over 'continue' arrow (used to reset hover effect)
+	hovered_continue = False
+
 
 	# Dialogue text settings
 	font = pygame.font.Font(None, 40)
@@ -18,10 +28,12 @@ def start_beginning(screen):
 	beginning_dialogue_2 = "You decide that a few changes need to be made, so you begin to get your hands dirty..."
 
 
-	# Images and position settings
+	# Images with defined positions
+	""" Yellow Civic in garage """
 	garage_with_civic = pygame.image.load("assets/garage_with_civic.png")
 	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
 
+	""" 'Continue' arrow button """
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))	# Display arrow at bottom right corner of screen
 
@@ -40,7 +52,6 @@ def start_beginning(screen):
 					if is_hovered(continue_arrow_rect):
 						fixing.start_fixing(screen)
 
-
 		screen.fill((0, 0, 0))
 
 
@@ -48,16 +59,16 @@ def start_beginning(screen):
 		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
 		screen.blit(continue_arrow,continue_arrow_rect.topleft)
 
-		""" Continue arrow shimmer effect """
+		""" 'Continue' arrow shimmer effect """
 		if is_hovered(continue_arrow_rect):
-			if not hovered_new:
-				shimmer_progress_new = 0
-				hovered_new = True
-			if shimmer_progress_new < 1:
-				shimmer_progress_new += 0.01
-				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_new)
+			if not hovered_continue:
+				shimmer_progress_continue = 0
+				hovered_continue = True
+			if shimmer_progress_continue < 1:
+				shimmer_progress_continue += 0.005
+				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
 		else:
-			hovered_new = False
+			hovered_continue = False
 
 
 		# Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line
