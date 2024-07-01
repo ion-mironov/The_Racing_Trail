@@ -6,7 +6,7 @@ from parameters import *
 import cruising
 
 
-# GIF animation function ============================================= #
+# === GIF animation function ================================================ #
 def load_frames(folder, prefix):
 	frames = []
 	for filename in sorted(os.listdir(folder)):
@@ -16,31 +16,32 @@ def load_frames(folder, prefix):
 	return frames
 
 
-#  'Fixing' level animation, text, and game loop ======================= #
+
+# === 'Fixing' level animation, text, and game loop ========================= #
 def start_fixing(screen):
 
-	""" Shimmer function """
-	# Initialize shimmer progress
-	shimmer_progress_continue = 0
-
-	# Check if cursor is over 'continue' arrow (used to reset hover effect)
-	hovered_continue = False
+	# === SHIMMER FUNCTION ========================================================================================================== #
+	shimmer_progress_continue = 0		# Initialize shimmer progress
+	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
 
 
-	# Define image frames for animation
+
+	# === ANIMATION ================================================================================================================= #
+	""" Define image frames for animation """
 	frames = load_frames("assets/civic_fix/", "frame_")			# Load all frames for the animation from specified folder; filenames start with 'frame_'
 	frame_count = len(frames)									# Calculate number of frames in list; returns length of list and stored into 'frame_count'
 	current_frame = 0											# Start animation with the very first frame
 
-	# Timing for frame updates
+	""" Timing for frame updates """
 	frame_delay = 100   # milliseconds
 	last_update = pygame.time.get_ticks()
 
-	# Get rect from first GIF frame to position animation
+	""" Get rect from first GIF frame to position animation """
 	civic_fix_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 5))
 
 
-	# Dialogue text settings
+
+	# === DIALOGUE TEXT ============================================================================================================= #
 	font = pygame.font.SysFont('Arial', 24)
 	you_tried_text_surface = font.render("Well, at least you tried...", True, WHITE)
 	you_tried_text_rect = you_tried_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.7))
@@ -49,23 +50,27 @@ def start_fixing(screen):
 	you_fixed_it_text_rect = you_fixed_it_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.1))
 
 
-	# 'Continue' arrow settings
+
+	# === 'CONTINUE' ARROW ========================================================================================================== #
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
 
-	# Animation states used to determine when 'fixing' animation and dialogue text display
+
+	# === ANIMATION STATES ========================================================================================================== #
 	animation_completed = False
 	you_tried_displayed = False
 	text_displayed_time = 0
 
-	# Time delays for when to display dialogue text after 'fixing' animation
+
+
+	# === TIME DELAYS  ============================================================================================================== #
 	animation_end_time = 1000	# milliseconds
 	second_text_delay = 1500	# milliseconds
 
 
 
-	""" Main loop """
+	# === 'FIXING' GAME LOOP ======================================================================================================== #
 	running = True
 	while running:
 		for event in pygame.event.get():
@@ -94,21 +99,23 @@ def start_fixing(screen):
 				text_displayed_time = pygame.time.get_ticks()  # Record the time when the animation completes
 
 
-
 		# Display animation
 		if current_frame < frame_count:
 			screen.blit(frames[current_frame], civic_fix_rect.topleft)
+
 
 		# Display dialogue text once the animation's final frame has displayed and first time-delay has passed
 		if animation_completed:
 			if now - text_displayed_time > animation_end_time:
 				screen.blit(you_tried_text_surface, you_tried_text_rect)
 				you_tried_displayed = True
-		
-		# Display the second dialogue text after the first has displayed and second time-delay has passed
+
+
+		# Display 'Continue' arrow and the second dialogue text after the first has displayed and second time-delay has passed
 		if you_tried_displayed and now - text_displayed_time > animation_end_time + second_text_delay:
 			screen.blit(you_fixed_it_text_surface, you_fixed_it_text_rect)
 			screen.blit(continue_arrow,continue_arrow_rect.topleft)
+
 
 			""" Continue arrow shimmer effect """
 			if is_hovered(continue_arrow_rect):
