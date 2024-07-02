@@ -20,7 +20,7 @@ def start_beginning(screen):
 	beginning_text_rect = beginning_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
 
 	font = pygame.font.SysFont('Arial', 20)
-	beginning_dialogue_1 = "You're a newly-graduated college student. After years of boring schoolwork, watching clichéd car racing movies, and playing similarly-themed racing games, you decided it was time to go out and see if you could turn those car racing fantasies into reality. As a graduation gift, your uncle gives you a gently-used 1997 Honda Civic."
+	beginning_dialogue_1 = "You're a newly-graduated college student. After years of boring schoolwork, watching clichéd car racing movies, and playing similarly-themed racing games, you decided it was time to go out and see if you could turn those car racing fantasies into reality. As a graduation gift, your uncle gives you his old 1997 Honda Civic."
 
 	beginning_dialogue_2 = "You decide that a few changes need to be made, so you begin to get your hands dirty..."
 
