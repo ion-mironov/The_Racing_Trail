@@ -16,7 +16,6 @@ def load_frames(folder, prefix):
 	return frames
 
 
-
 #  === 'Cruising' level animation, text, and game loop ====================== #
 def start_cruising(screen):
 
@@ -25,11 +24,9 @@ def start_cruising(screen):
 	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
 
 
-
 	# === DIALOGUE TEXT ============================================================================================================= #
 	font = pygame.font.SysFont('Arial', 24)
-	cruising_text = "After a splash of paint, lowered suspension, and some different wheels, you hit the open road and begin your journey."
-
+	cruising_text = "You installed a new Cold Air Intake (CAI) filter kit and stainless steel cat-back exhaust, taking the car's stock engine with its 106 horsepower and 103 lb-ft of torque up to a more acceptable 166 HP and 159 lb-ft of torque. Along with that, you also gave it a new splash of paint, a lowered suspension, and some custom wheels. Now, the car finally feels likes it's yours."
 
 
 	# === ANIMATION ================================================================================================================= #
@@ -43,14 +40,12 @@ def start_cruising(screen):
 	last_update = pygame.time.get_ticks()
 
 	""" Get rect from first GIF frame to position animation """
-	civic_cruising_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
-
+	civic_cruising_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
 
 
 	# === 'CONTINUE' ARROW ========================================================================================================== #
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
-
 
 
 	# === 'CRUISING' GAME LOOP ====================================================================================================== #
