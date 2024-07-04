@@ -3,7 +3,6 @@ import pygame
 from animations import *
 from game_functions import *
 from parameters import *
-from random_events import *
 import beginning
 
 
@@ -85,8 +84,11 @@ while running:
 		if shimmer_progress_new < 1:
 			shimmer_progress_new += 0.01
 			draw_shimmer(screen, new_game_rect, shimmer_progress_new)
-		pygame.mouse.set_system_cursor(hand_cursor)
+
+		""" Change to 'hand' cursor when hovering over a selectable item """
+		pygame.mouse.set_cursor(hand_cursor)
 		cursor_changed = True
+
 	else:
 		hovered_new = False
 
@@ -96,11 +98,15 @@ while running:
 		if not hovered_load:
 			shimmer_progress_load = 0
 			hovered_load = True
+
 		if shimmer_progress_load < 1:
 			shimmer_progress_load += 0.01
 			draw_shimmer(screen, load_game_rect, shimmer_progress_load)
-		pygame.mouse.set_system_cursor(hand_cursor)
+
+		""" Change to 'hand' cursor when hovering over a selectable item """
+		pygame.mouse.set_cursor(hand_cursor)
 		cursor_changed = True
+
 	else:
 		hovered_load = False
 
@@ -110,16 +116,21 @@ while running:
 		if not hovered_exit:
 			shimmer_progress_exit = 0
 			hovered_exit = True
+
 		if shimmer_progress_exit < 1:
 			shimmer_progress_exit += 0.01
 			draw_shimmer(screen, exit_game_rect, shimmer_progress_exit)
-		pygame.mouse.set_system_cursor(hand_cursor)
+
+		""" Change to 'hand' cursor when hovering over a selectable item """
+		pygame.mouse.set_cursor(hand_cursor)
 		cursor_changed = True
+
 	else:
 		hovered_exit = False
 	
 	if not cursor_changed:
-		pygame.mouse.set_system_cursor(arrow_cursor)
+		""" Change to 'arrow' cursor all other times """
+		pygame.mouse.set_cursor(arrow_cursor)
 	
 	pygame.display.flip()
 

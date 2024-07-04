@@ -48,7 +48,7 @@ def start_fixing(screen):
 	you_tried_text_surface = font.render("Well, at least you tried...", True, WHITE)
 	you_tried_text_rect = you_tried_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.7))
 
-	you_fixed_it_text_surface = font.render("But, after a few hours of swearing and spending what little money you had, you finally got your car to your liking.", True, WHITE)
+	you_fixed_it_text_surface = font.render("But, after a few hours of swearing and spending what little money you had, you finally got the car to your liking.", True, WHITE)
 	you_fixed_it_text_rect = you_fixed_it_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.1))
 
 
@@ -85,7 +85,7 @@ def start_fixing(screen):
 		screen.fill((0, 0, 0))
 
 
-		# Update the frame animation index and stop once the final frame is displayed
+		# Update civic_fix frame animation index and stop once the last frame is displayed
 		now = pygame.time.get_ticks()
 		if now - last_update > frame_delay and not animation_completed:
 			current_frame += 1
@@ -102,14 +102,14 @@ def start_fixing(screen):
 			screen.blit(frames[current_frame], civic_fix_rect.topleft)
 
 
-		# Display dialogue text once the animation's final frame has displayed and first time-delay has passed
+		# Display dialogue text once the animation's last frame has displayed AND first time-delay has passed
 		if animation_completed:
 			if now - text_displayed_time > animation_end_time:
 				screen.blit(you_tried_text_surface, you_tried_text_rect)
 				you_tried_displayed = True
 
 
-		# Display 'Continue' arrow and the second dialogue text after the first has displayed and second time-delay has passed
+		# Display 'Continue' arrow AND the second dialogue text after the first has displayed AND second time-delay has passed
 		if you_tried_displayed and now - text_displayed_time > animation_end_time + second_text_delay:
 			screen.blit(you_fixed_it_text_surface, you_fixed_it_text_rect)
 			screen.blit(continue_arrow,continue_arrow_rect.topleft)
@@ -120,16 +120,19 @@ def start_fixing(screen):
 				if not hovered_continue:
 					shimmer_progress_continue = 0
 					hovered_continue = True
+
 				if shimmer_progress_continue < 1:
 					shimmer_progress_continue += 0.003
 					draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
-				pygame.mouse.set_system_cursor(hand_cursor)
+
+				pygame.mouse.set_cursor(hand_cursor)
+
 			else:
 				hovered_continue = False
 				pygame.mouse.set_system_cursor(arrow_cursor)
-
+			
 		else:
-			pygame.mouse.set_system_cursor(arrow_cursor)
+			pygame.mouse.set_cursor(arrow_cursor)
 
 		pygame.display.flip()
 

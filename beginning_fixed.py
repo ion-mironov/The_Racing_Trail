@@ -20,9 +20,9 @@ def fixed_civic(screen):
 
 	# === DIALOGUE TEXT ============================================================================================================= #
 	font = pygame.font.SysFont('Arial', 20)
-	beginning_fixed_dialogue_1 = "You installed a new Cold Air Intake (CAI) filter kit and stainless steel cat-back exhaust, taking the car's stock engine with its 106 horsepower and 103 lb-ft of torque up to a more acceptable 166 HP and 159 lb-ft of torque. Along with that, you also gave it a new splash of paint, a lowered suspension, and some custom wheels. Now, the car finally feels likes it's yours."
+	beginning_fixed_dialogue_1 = "You installed a new Cold Air Intake (CAI) kit and stainless steel cat-back exhaust, taking the car's stock engine with its 106 horsepower and 103 lb-ft of torque up to a more acceptable 166 HP and 159 lb-ft of torque. Along with that, you also gave it a new splash of paint, a lowered suspension, and some custom wheels. Now, the car finally feels likes it's yours."
 
-	beginning_fixed_dialogue_2 = "Now, it is time to hit the open road!"
+	beginning_fixed_dialogue_2 = "Now, it is time to hit the open road and head west!"
 
 
 	# === IMAGES ==================================================================================================================== #
@@ -63,22 +63,26 @@ def fixed_civic(screen):
 		text_wrap(screen, beginning_fixed_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
 
+		cursor_changed = False
+
 		""" 'Continue' arrow shimmer effect """
 		if is_hovered(continue_arrow_rect):
 			if not hovered_continue:
 				shimmer_progress_continue = 0
 				hovered_continue = True
+
 			if shimmer_progress_continue < 1:
 				shimmer_progress_continue += 0.02
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
-			pygame.mouse.set_system_cursor(hand_cursor)
+
+			pygame.mouse.set_cursor(hand_cursor)
 			cursor_changed = True
+
 		else:
 			hovered_continue = False
-			pygame.mouse.set_system_cursor(arrow_cursor)
 
 		if not cursor_changed:
-			pygame.mouse.set_system_cursor(arrow_cursor)
+			pygame.mouse.set_cursor(arrow_cursor)
 
 		pygame.display.flip()
 

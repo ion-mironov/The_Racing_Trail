@@ -25,9 +25,9 @@ def start_beginning(screen):
 	beginning_text_rect = beginning_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
 
 	font = pygame.font.SysFont('Arial', 20)
-	beginning_dialogue_1 = "You're a newly-graduated college student living in Pennsylvania, USA. During those years of boring college courses, you watched a lot of clichéd car racing-themed movies and played similar games to pass the time. Now that you're free, you wondered if it was possible to go out and live a life of racing against others and making it big in the car-racing world. As a graduation gift, your dad gives you his old, but trusty, 1997 Honda Civic hatchback and this is when you felt it was a sign to turn that dream into a reality."
+	beginning_dialogue_1 = "You're a newly-graduated college student living in Pennsylvania, USA. During those years of boring college courses, you watched a lot of clichéd car racing-themed movies and played similar games to pass the time. Now that you're free, you wondered if it was possible to go out and live a life of racing against others and making it big in the car-racing world. As a graduation gift, your dad gives you his old, but trusty, 1997 Honda Civic hatchback; and this is when you felt it was a sign to turn that dream into a reality."
 
-	beginning_dialogue_2 = "You decide that a few changes need to be made, so you begin to get your hands dirty..."
+	beginning_dialogue_2 = "You decide that a few changes to the car need to be made, so you begin to get your hands dirty..."
 
 
 	# === IMAGES ==================================================================================================================== #
@@ -68,25 +68,27 @@ def start_beginning(screen):
 		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
-		cursor_changed = False
 
+		cursor_changed = False
 
 		""" 'Continue' arrow shimmer effect """
 		if is_hovered(continue_arrow_rect):
 			if not hovered_continue:
 				shimmer_progress_continue = 0
 				hovered_continue = True
+
 			if shimmer_progress_continue < 1:
 				shimmer_progress_continue += 0.03
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
-			pygame.mouse.set_system_cursor(hand_cursor)
+
+			pygame.mouse.set_cursor(hand_cursor)
 			cursor_changed = True
+
 		else:
 			hovered_continue = False
-			pygame.mouse.set_system_cursor(arrow_cursor)
 		
 		if not cursor_changed:
-			pygame.mouse.set_system_cursor(arrow_cursor)
+			pygame.mouse.set_cursor(arrow_cursor)
 
 		pygame.display.flip()
 
