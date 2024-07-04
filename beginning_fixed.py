@@ -2,7 +2,7 @@ import pygame
 
 from game_functions import *
 from parameters import *
-import beginning_fixing
+import cruising
 
 
 
@@ -20,9 +20,9 @@ def start_beginning(screen):
 	beginning_text_rect = beginning_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
 
 	font = pygame.font.SysFont('Arial', 20)
-	beginning_dialogue_1 = "You're a newly-graduated college student living in Pennsylvania, USA. During those years of boring college courses, you watched a lot of clichéd car racing-themed movies and played similar games to pass the time. Now that you're free, you wondered if it was possible to go out and live a life of racing against others and making it big in the car-racing world. As a graduation gift, your dad gives you his old, but trusty, 1997 Honda Civic hatchback and this is when you felt it was a sign to turn that dream into a reality."
+	beginning_fixed_dialogue_1 = "You installed a new Cold Air Intake (CAI) filter kit and stainless steel cat-back exhaust, taking the car's stock engine with its 106 horsepower and 103 lb-ft of torque up to a more acceptable 166 HP and 159 lb-ft of torque. Along with that, you also gave it a new splash of paint, a lowered suspension, and some custom wheels. Now, the car finally feels likes it's yours."
 
-	beginning_dialogue_2 = "You decide that a few changes need to be made, so you begin to get your hands dirty..."
+	beginning_fixed_dialogue_2 = "You decide that a few changes need to be made, so you begin to get your hands dirty..."
 
 
 	# === IMAGES ==================================================================================================================== #
@@ -48,7 +48,7 @@ def start_beginning(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						beginning_fixing.start_fixing(screen)
+						cruising.start_fixing(screen)
 
 		screen.fill((0, 0, 0))
 
@@ -60,8 +60,8 @@ def start_beginning(screen):
 
 
 		# Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line
-		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, beginning_fixed_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, beginning_fixed_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
 
 		""" 'Continue' arrow shimmer effect """

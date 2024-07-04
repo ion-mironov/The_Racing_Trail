@@ -31,7 +31,7 @@ def start_cruising(screen):
 
 	# === ANIMATION ================================================================================================================= #
 	""" Define image frames for animation """
-	frames = load_frames("assets/civic_cruising/", "frame_")	# Load all frames for the animation from specified folder; filenames start with 'frame_'
+	frames = load_frames("assets/blue_civic_cruising/", "frame_")	# Load all frames for the animation from specified folder; filenames start with 'frame_'
 	frame_count = len(frames)									# Calculate number of frames in list; returns length of list and stored into 'frame_count'
 	current_frame = 0											# Start animation with the very first frame
 
