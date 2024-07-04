@@ -16,14 +16,12 @@ def load_frames(folder, prefix):
 	return frames
 
 
-
 # === 'Fixing' level animation, text, and game loop ========================= #
 def start_fixing(screen):
 
 	# === SHIMMER FUNCTION ========================================================================================================== #
 	shimmer_progress_continue = 0		# Initialize shimmer progress
 	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
-
 
 
 	# === ANIMATION ================================================================================================================= #
@@ -40,7 +38,6 @@ def start_fixing(screen):
 	civic_fix_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 5))
 
 
-
 	# === DIALOGUE TEXT ============================================================================================================= #
 	font = pygame.font.SysFont('Arial', 24)
 	you_tried_text_surface = font.render("Well, at least you tried...", True, WHITE)
@@ -50,11 +47,9 @@ def start_fixing(screen):
 	you_fixed_it_text_rect = you_fixed_it_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.1))
 
 
-
 	# === 'CONTINUE' ARROW ========================================================================================================== #
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
-
 
 
 	# === ANIMATION STATES ========================================================================================================== #
@@ -63,11 +58,9 @@ def start_fixing(screen):
 	text_displayed_time = 0
 
 
-
 	# === TIME DELAYS  ============================================================================================================== #
-	animation_end_time = 1000	# milliseconds
-	second_text_delay = 1500	# milliseconds
-
+	animation_end_time = 500	# milliseconds
+	second_text_delay = 1000	# milliseconds
 
 
 	# === 'FIXING' GAME LOOP ======================================================================================================== #

@@ -20,7 +20,7 @@ def start_beginning(screen):
 	beginning_text_rect = beginning_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
 
 	font = pygame.font.SysFont('Arial', 20)
-	beginning_dialogue_1 = "You're a newly-graduated college student. After years of boring schoolwork, watching clichéd car racing movies, and playing similarly-themed racing games, you decided it was time to go out and see if you could turn those car racing fantasies into reality. As a graduation gift, your uncle gives you his old 1997 Honda Civic."
+	beginning_dialogue_1 = "You're a newly-graduated college student living in Pennsylvania, USA. During those years of boring college courses, you watched a lot of clichéd car racing-themed movies and played similar games to pass the time. Now that you're free, you wondered if it was possible to go out and live a life of racing against others and making it big in the car-racing world. As a graduation gift, your dad gives you his old, but trusty, 1997 Honda Civic hatchback and this is when you felt it was a sign to turn that dream into a reality."
 
 	beginning_dialogue_2 = "You decide that a few changes need to be made, so you begin to get your hands dirty..."
 
@@ -61,7 +61,7 @@ def start_beginning(screen):
 
 		# Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line
 		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3.5), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
 
 		""" 'Continue' arrow shimmer effect """
