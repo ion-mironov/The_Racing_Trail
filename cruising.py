@@ -5,6 +5,10 @@ from game_functions import *
 from parameters import *
 
 
+# Define cursors
+arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
+hand_cursor = pygame.SYSTEM_CURSOR_HAND
+
 
 # === GIF animation function ================================================ #
 def load_frames(folder, prefix):
@@ -20,20 +24,20 @@ def load_frames(folder, prefix):
 def start_cruising(screen):
 
 	# === SHIMMER FUNCTION ========================================================================================================== #
-	shimmer_progress_continue = 0		# Initialize shimmer progress
-	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
+	shimmer_progress_continue = 0
+	hovered_continue = False
 
 
 	# === DIALOGUE TEXT ============================================================================================================= #
 	font = pygame.font.SysFont('Arial', 24)
-	cruising_text = "You installed a new Cold Air Intake (CAI) filter kit and stainless steel cat-back exhaust, taking the car's stock engine with its 106 horsepower and 103 lb-ft of torque up to a more acceptable 166 HP and 159 lb-ft of torque. Along with that, you also gave it a new splash of paint, a lowered suspension, and some custom wheels. Now, the car finally feels likes it's yours."
+	cruising_text = "Enter text here?"
 
 
 	# === ANIMATION ================================================================================================================= #
 	""" Define image frames for animation """
-	frames = load_frames("assets/blue_civic_cruising/", "frame_")	# Load all frames for the animation from specified folder; filenames start with 'frame_'
-	frame_count = len(frames)									# Calculate number of frames in list; returns length of list and stored into 'frame_count'
-	current_frame = 0											# Start animation with the very first frame
+	frames = load_frames("assets/blue_civic_cruising/", "frame_")
+	frame_count = len(frames)
+	current_frame = 0
 
 	""" Timing for frame updates """
 	frame_delay = 100   # milliseconds
@@ -84,10 +88,16 @@ def start_cruising(screen):
 				shimmer_progress_continue = 0
 				hovered_continue = True
 			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.005
+				shimmer_progress_continue += 0.01
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
+			pygame.mouse.set_system_cursor(hand_cursor)
+			cursor_changed = True
 		else:
 			hovered_continue = False
+			pygame.mouse.set_system_cursor(arrow_cursor)
+
+		if not cursor_changed:
+			pygame.mouse.set_system_cursor(arrow_cursor)
 
 		pygame.display.flip()
 

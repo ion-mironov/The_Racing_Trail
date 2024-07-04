@@ -6,6 +6,11 @@ import beginning_fixing
 
 
 
+# Define cursors
+arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
+hand_cursor = pygame.SYSTEM_CURSOR_HAND
+
+
 # 'Beginning' level images, dialogue text, and game loop
 def start_beginning(screen):
 
@@ -27,8 +32,8 @@ def start_beginning(screen):
 
 	# === IMAGES ==================================================================================================================== #
 	""" Yellow Civic in garage """
-	garage_with_civic = pygame.image.load("assets/garage_with_civic.png")
-	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
+	garage_with_civic = pygame.image.load("assets/red_civic_in_garage.png")
+	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
 
 	""" 'Continue' arrow button """
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
@@ -63,6 +68,8 @@ def start_beginning(screen):
 		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
+		cursor_changed = False
+
 
 		""" 'Continue' arrow shimmer effect """
 		if is_hovered(continue_arrow_rect):
@@ -70,10 +77,16 @@ def start_beginning(screen):
 				shimmer_progress_continue = 0
 				hovered_continue = True
 			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.005
+				shimmer_progress_continue += 0.03
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
+			pygame.mouse.set_system_cursor(hand_cursor)
+			cursor_changed = True
 		else:
 			hovered_continue = False
+			pygame.mouse.set_system_cursor(arrow_cursor)
+		
+		if not cursor_changed:
+			pygame.mouse.set_system_cursor(arrow_cursor)
 
 		pygame.display.flip()
 

@@ -3,7 +3,12 @@ import pygame
 
 from game_functions import *
 from parameters import *
-import cruising
+import beginning_fixed
+
+
+# Define cursors
+arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
+hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 # === GIF animation function ================================================ #
@@ -59,8 +64,8 @@ def start_fixing(screen):
 
 
 	# === TIME DELAYS  ============================================================================================================== #
-	animation_end_time = 500	# milliseconds
-	second_text_delay = 1000	# milliseconds
+	animation_end_time = 1000	# milliseconds
+	second_text_delay =  1500	# milliseconds
 
 
 	# === 'FIXING' GAME LOOP ======================================================================================================== #
@@ -75,7 +80,7 @@ def start_fixing(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						cruising.start_cruising(screen)
+						beginning_fixed.fixed_civic(screen)
 
 		screen.fill((0, 0, 0))
 
@@ -118,8 +123,13 @@ def start_fixing(screen):
 				if shimmer_progress_continue < 1:
 					shimmer_progress_continue += 0.003
 					draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
+				pygame.mouse.set_system_cursor(hand_cursor)
 			else:
 				hovered_continue = False
+				pygame.mouse.set_system_cursor(arrow_cursor)
+
+		else:
+			pygame.mouse.set_system_cursor(arrow_cursor)
 
 		pygame.display.flip()
 
