@@ -33,7 +33,7 @@ shimmer_progress_load = 0
 shimmer_progress_exit = 0
 
 
-# Check if cursor is over images (used to reset hover effect)
+# Check if cursor is over images (used to reset hover shimmer effect)
 hovered_new = False
 hovered_load = False
 hovered_exit = False
@@ -44,8 +44,9 @@ arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
 hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
+
 # ============================================================================================= #
-""" Main game loop """
+# === 'MAIN' GAME LOOP ======================================================================== #
 running = True
 while running:
 	for event in pygame.event.get():
@@ -129,7 +130,7 @@ while running:
 		hovered_exit = False
 	
 	if not cursor_changed:
-		""" Change to 'arrow' cursor all other times """
+		""" Change to 'arrow' cursor when not hovering over a selectable item """
 		pygame.mouse.set_cursor(arrow_cursor)
 	
 	pygame.display.flip()

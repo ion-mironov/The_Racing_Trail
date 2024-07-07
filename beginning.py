@@ -14,11 +14,14 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 # 'Beginning' level images, dialogue text, and game loop
 def start_beginning(screen):
 
+	# =============================================================================================================================== #
 	# === SHIMMER FUNCTION ========================================================================================================== #
 	shimmer_progress_continue = 0		# Initialize shimmer progress
 	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
 
 
+
+	# =============================================================================================================================== #
 	# === DIALOGUE TEXT ============================================================================================================= #
 	font = pygame.font.Font(None, 40)
 	beginning_text_surface = font.render("A New Beginning", True, (CYAN))
@@ -30,6 +33,8 @@ def start_beginning(screen):
 	beginning_dialogue_2 = "You decide that a few changes to the car need to be made, so you begin to get your hands dirty..."
 
 
+
+	# =============================================================================================================================== #
 	# === IMAGES ==================================================================================================================== #
 	""" Yellow Civic in garage """
 	garage_with_civic = pygame.image.load("assets/red_civic_in_garage.png")
@@ -41,6 +46,7 @@ def start_beginning(screen):
 
 
 
+	# =============================================================================================================================== #
 	# === 'BEGINNING' GAME LOOP ===================================================================================================== #
 	running = True
 	while running:
