@@ -96,6 +96,7 @@ def start_beginning(screen):
 		if not cursor_changed:
 			pygame.mouse.set_cursor(arrow_cursor)
 
+
 		pygame.display.flip()
 
 	pygame.quit()
