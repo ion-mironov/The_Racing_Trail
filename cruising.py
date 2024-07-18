@@ -3,11 +3,14 @@ import pygame
 
 from game_functions import *
 from parameters import *
+import broken_down
+
 
 
 # Define cursors
 arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
 hand_cursor = pygame.SYSTEM_CURSOR_HAND
+
 
 
 # =========================================================================== #
@@ -21,21 +24,23 @@ def load_frames(folder, prefix):
 	return frames
 
 
+
 # =========================================================================== #
-#  === 'Cruising' level animation, text, and game loop ====================== #
+# === Level animation, text, and game loop ================================== #
 def start_cruising(screen):
 
 	# =============================================================================================================================== #
 	# === SHIMMER FUNCTION ========================================================================================================== #
 	shimmer_progress_continue = 0
 	hovered_continue = False
-	show_broken_civic = False
+
 
 
 	# =============================================================================================================================== #
 	# === DIALOGUE TEXT ============================================================================================================= #
 	font = pygame.font.SysFont('Arial', 24)
 	cruising_text = "You grin from ear to ear as you cruise down the road, tunes thumping from the radio as your car glides along the pavement, the engine and exhaust note both complementing each other as all your modifications work in perfect harmony."
+
 
 
 	# =============================================================================================================================== #
@@ -53,15 +58,11 @@ def start_cruising(screen):
 	civic_cruising_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
 
 
+
 	# =============================================================================================================================== #
 	# === 'CONTINUE' ARROW ========================================================================================================== #
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
-
-
-	# Display broken Civic image to when the 'Continue' arrow is clicked on
-	broken_civic = pygame.image.load("assets/civic_broken_down.png")
-	broken_civic_rect = broken_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
 
 
 
@@ -78,25 +79,19 @@ def start_cruising(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						show_broken_civic = True
+						broken_down.broken_down_civic(screen)
 
 
 		screen.fill((0, 0, 0))
 
-		if not show_broken_civic:
-			now = pygame.time.get_ticks()
-			if now - last_update > frame_delay:
-				current_frame = (current_frame + 1) % frame_count
-				last_update = now
+		now = pygame.time.get_ticks()
+		if now - last_update > frame_delay:
+			current_frame = (current_frame + 1) % frame_count
+			last_update = now
 
+		screen.blit(frames[current_frame], civic_cruising_rect.topleft)
 
-			# Display animation, dialogue text, and 'Continue' arrow
-			screen.blit(frames[current_frame], civic_cruising_rect.topleft)
-		else:
-			screen.blit(broken_civic, broken_civic_rect)
-
-
-		screen.blit(continue_arrow,continue_arrow_rect.topleft)
+		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 		text_wrap(screen, cruising_text, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
 

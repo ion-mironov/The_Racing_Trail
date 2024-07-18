@@ -6,6 +6,7 @@ from parameters import *
 import beginning_fixed
 
 
+
 # Define cursors
 arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
 hand_cursor = pygame.SYSTEM_CURSOR_HAND
@@ -25,7 +26,7 @@ def load_frames(folder, prefix):
 
 
 # =========================================================================== #
-# === 'Fixing' level animation, text, and game loop ========================= #
+# === Level animation, text, and game loop ================================== #
 def start_fixing(screen):
 
 	# =============================================================================================================================== #
@@ -126,10 +127,10 @@ def start_fixing(screen):
 				you_tried_displayed = True
 
 
-		# Display 'Continue' arrow AND the second dialogue text after the first has displayed AND second time-delay has passed
+		# Display 'Continue' arrow AND the second dialogue text AFTER the first dialogue has displayed AND second time-delay has passed
 		if you_tried_displayed and now - text_displayed_time > animation_end_time + second_text_delay:
 			screen.blit(you_fixed_it_text_surface, you_fixed_it_text_rect)
-			screen.blit(continue_arrow,continue_arrow_rect.topleft)
+			screen.blit(continue_arrow, continue_arrow_rect.topleft)
 
 
 			""" Continue arrow shimmer effect """

@@ -9,7 +9,15 @@ import beginning
 pygame.init()
 
 
-# Main Menu images
+
+# Define cursors
+arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
+hand_cursor = pygame.SYSTEM_CURSOR_HAND
+
+
+
+# =========================================================================== #
+# === Main Menu images ====================================================== #
 background = pygame.image.load("assets/main_menu/background.png")
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 
@@ -26,22 +34,19 @@ exit_game_image = pygame.image.load("assets/main_menu/exit_game_image.png")
 exit_game_rect = exit_game_image.get_rect(center=(WIDTH // 2, HEIGHT // 1.15))
 
 
-""" Shimmer function """
-# Initialize shimmer progress
+
+# =========================================================================== #
+# === Shimmer function ====================================================== #
+
+""" Initialize shimmer progress """
 shimmer_progress_new = 0
 shimmer_progress_load = 0
 shimmer_progress_exit = 0
-
 
 # Check if cursor is over images (used to reset hover shimmer effect)
 hovered_new = False
 hovered_load = False
 hovered_exit = False
-
-
-# Define cursors
-arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
-hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 

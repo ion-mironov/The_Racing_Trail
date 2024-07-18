@@ -2,7 +2,6 @@ import pygame
 
 from game_functions import *
 from parameters import *
-import cruising
 
 
 
@@ -13,31 +12,29 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 # =========================================================================== #
-# === Level images, dialogue text, and game loop ============================ #
-def fixed_civic(screen):
+# === Level animation, text, and game loop ================================== #
+def broken_down_civic(screen):
 
 	# =============================================================================================================================== #
 	# === SHIMMER FUNCTION ========================================================================================================== #
-	shimmer_progress_continue = 0		# Initialize shimmer progress
-	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
+	shimmer_progress_continue = 0
+	hovered_continue = False
 
 
 
 	# =============================================================================================================================== #
 	# === DIALOGUE TEXT ============================================================================================================= #
-	font = pygame.font.SysFont('Arial', 20)
-	beginning_fixed_dialogue_1 = "You installed a new Cold Air Intake (CAI) kit and stainless steel cat-back exhaust, taking the car's stock engine with its 106 horsepower and 103 lb-ft of torque up to a more acceptable 166 HP and 159 lb-ft of torque. Along with that, you also gave it a new splash of paint, a lowered suspension, and some custom wheels. Now, the car finally feels likes it's yours."
-
-	beginning_fixed_dialogue_2 = "Now, it is time to hit the open road and head west!"
+	font = pygame.font.SysFont('Arial', 24)
+	broken_down_text = "You suffered a puncture!"
 
 
 
 	# =============================================================================================================================== #
 	# === IMAGES ==================================================================================================================== #
 
-	""" Blue Civic in garage """
-	garage_with_civic = pygame.image.load("assets/blue_civic_in_garage.png")
-	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
+	""" Broken down Civic """
+	broken_down_civic = pygame.image.load("assets/broken_down_civic.png")
+	broken_down_civic_rect = broken_down_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
 
 	""" 'Continue' arrow button """
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
@@ -57,15 +54,14 @@ def fixed_civic(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						cruising.start_cruising(screen)
+						pass
 
 		screen.fill((0, 0, 0))
 
-		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
+		screen.blit(broken_down_civic, broken_down_civic_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 
-		text_wrap(screen, beginning_fixed_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		text_wrap(screen, beginning_fixed_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, broken_down_text, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
 		cursor_changed = False
 
