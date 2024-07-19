@@ -13,8 +13,8 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 
-# =========================================================================== #
-# === GIF animation function ================================================ #
+# ═══════════════════════════════════════════════════════════════════════════ #
+# ═══ GIF ANIMATION FUNCTION ════════════════════════════════════════════════ #
 def load_frames(folder, prefix):
 	frames = []
 	for filename in sorted(os.listdir(folder)):
@@ -24,27 +24,26 @@ def load_frames(folder, prefix):
 	return frames
 
 
-
-# =========================================================================== #
-# === Level animation, text, and game loop ================================== #
+# ═══════════════════════════════════════════════════════════════════════════ #
+# ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
 def start_cruising(screen):
 
-	# =============================================================================================================================== #
-	# === SHIMMER FUNCTION ========================================================================================================== #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ SHIMMER FUNCTION ═════════════════════════════════════════════════════════════════════════════════════════════ #
 	shimmer_progress_continue = 0
 	hovered_continue = False
 
 
 
-	# =============================================================================================================================== #
-	# === DIALOGUE TEXT ============================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ DIALOGUE TEXT ════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.SysFont('Arial', 24)
 	cruising_text = "You grin from ear to ear as you cruise down the road, tunes thumping from the radio as your car glides along the pavement, the engine and exhaust note both complementing each other as all your modifications work in perfect harmony."
 
 
 
-	# =============================================================================================================================== #
-	# === ANIMATION ================================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ ANIMATION ════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	""" Define image frames for animation """
 	frames = load_frames("assets/blue_civic_cruising/", "day_")
 	frame_count = len(frames)
@@ -59,15 +58,15 @@ def start_cruising(screen):
 
 
 
-	# =============================================================================================================================== #
-	# === 'CONTINUE' ARROW ========================================================================================================== #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ 'CONTINUE' ARROW ═════════════════════════════════════════════════════════════════════════════════════════════ #
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
 
 
-	# =============================================================================================================================== #
-	# === GAME LOOP ================================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ GAME LOOP ════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	running = True
 	while running:
 		for event in pygame.event.get():
@@ -75,13 +74,13 @@ def start_cruising(screen):
 				pygame.quit()
 				exit()
 
-			# 'Continue' arrow button
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
 						broken_down.broken_down_civic(screen)
 
 
+		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
 		now = pygame.time.get_ticks()
@@ -90,12 +89,15 @@ def start_cruising(screen):
 			last_update = now
 
 		screen.blit(frames[current_frame], civic_cruising_rect.topleft)
-
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
+
 		text_wrap(screen, cruising_text, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
 
-		""" 'Continue' arrow shimmer effect """
+		# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
+		cursor_changed = False
+
 		if is_hovered(continue_arrow_rect):
 			if not hovered_continue:
 				shimmer_progress_continue = 0
@@ -113,6 +115,7 @@ def start_cruising(screen):
 
 		if not cursor_changed:
 			pygame.mouse.set_cursor(arrow_cursor)
+		# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
 
 
 		pygame.display.flip()

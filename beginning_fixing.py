@@ -13,8 +13,8 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 
-# =========================================================================== #
-# === GIF animation function ================================================ #
+# ═══════════════════════════════════════════════════════════════════════════ #
+# ═══ GIF ANIMATION FUNCTION ════════════════════════════════════════════════ #
 def load_frames(folder, prefix):
 	frames = []
 	for filename in sorted(os.listdir(folder)):
@@ -25,19 +25,19 @@ def load_frames(folder, prefix):
 
 
 
-# =========================================================================== #
-# === Level animation, text, and game loop ================================== #
+# ═══════════════════════════════════════════════════════════════════════════ #
+# ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
 def start_fixing(screen):
 
-	# =============================================================================================================================== #
-	# === SHIMMER FUNCTION ========================================================================================================== #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ SHIMMER FUNCTION ═════════════════════════════════════════════════════════════════════════════════════════════ #
 	shimmer_progress_continue = 0		# Initialize shimmer progress
 	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
 
 
 
-	# =============================================================================================================================== #
-	# === ANIMATION ================================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ ANIMATION ════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	""" Define image frames for animation """
 	frames = load_frames("assets/civic_fix/", "frame_")			# Load all frames for the animation from specified folder; filenames start with 'frame_'
 	frame_count = len(frames)									# Calculate number of frames in list; returns length of list and stored into 'frame_count'
@@ -52,8 +52,8 @@ def start_fixing(screen):
 
 
 
-	# =============================================================================================================================== #
-	# === DIALOGUE TEXT ============================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ DIALOGUE TEXT ════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.SysFont('Arial', 24)
 	you_tried_text_surface = font.render("Well, at least you tried...", True, WHITE)
 	you_tried_text_rect = you_tried_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.7))
@@ -63,30 +63,30 @@ def start_fixing(screen):
 
 
 
-	# =============================================================================================================================== #
-	# === 'CONTINUE' ARROW ========================================================================================================== #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ 'CONTINUE' ARROW ═════════════════════════════════════════════════════════════════════════════════════════════ #
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
 
 
-	# =============================================================================================================================== #
-	# === ANIMATION STATES ========================================================================================================== #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ ANIMATION STATES ═════════════════════════════════════════════════════════════════════════════════════════════ #
 	animation_completed = False
 	you_tried_displayed = False
 	text_displayed_time = 0
 
 
 
-	# =============================================================================================================================== #
-	# === TIME DELAYS  ============================================================================================================== #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ TIME DELAYS  ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	animation_end_time = 1000	# milliseconds
 	second_text_delay =  1500	# milliseconds
 
 
 
-	# =============================================================================================================================== #
-	# === GAME LOOP ================================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ GAME LOOP ════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	running = True
 	while running:
 		for event in pygame.event.get():
@@ -100,6 +100,8 @@ def start_fixing(screen):
 					if is_hovered(continue_arrow_rect):
 						beginning_fixed.fixed_civic(screen)
 
+
+		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
 
@@ -131,9 +133,12 @@ def start_fixing(screen):
 		if you_tried_displayed and now - text_displayed_time > animation_end_time + second_text_delay:
 			screen.blit(you_fixed_it_text_surface, you_fixed_it_text_rect)
 			screen.blit(continue_arrow, continue_arrow_rect.topleft)
+		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
 
-			""" Continue arrow shimmer effect """
+			# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
+			cursor_changed = False
+
 			if is_hovered(continue_arrow_rect):
 				if not hovered_continue:
 					shimmer_progress_continue = 0
@@ -144,13 +149,20 @@ def start_fixing(screen):
 					draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
 
 				pygame.mouse.set_cursor(hand_cursor)
+				cursor_changed = True
 
 			else:
 				hovered_continue = False
-				pygame.mouse.set_system_cursor(arrow_cursor)
 			
+			if not cursor_changed:
+				pygame.mouse.set_cursor(arrow_cursor)
+			# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
+
+
+		# ▼ This line is needed to ensure cursor is set to default system arrow ▼ #
 		else:
 			pygame.mouse.set_cursor(arrow_cursor)
+
 
 		pygame.display.flip()
 

@@ -12,19 +12,19 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 
-# =========================================================================== #
-# === Level images, dialogue text, and game loop ============================ #
+# ═══════════════════════════════════════════════════════════════════════════ #
+# ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
 def fixed_civic(screen):
 
-	# =============================================================================================================================== #
-	# === SHIMMER FUNCTION ========================================================================================================== #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ SHIMMER FUNCTION ═════════════════════════════════════════════════════════════════════════════════════════════ #
 	shimmer_progress_continue = 0		# Initialize shimmer progress
 	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
 
 
 
-	# =============================================================================================================================== #
-	# === DIALOGUE TEXT ============================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ DIALOGUE TEXT ════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.SysFont('Arial', 20)
 	beginning_fixed_dialogue_1 = "You installed a new Cold Air Intake (CAI) kit and stainless steel cat-back exhaust, taking the car's stock engine with its 106 horsepower and 103 lb-ft of torque up to a more acceptable 166 HP and 159 lb-ft of torque. Along with that, you also gave it a new splash of paint, a lowered suspension, and some custom wheels. Now, the car finally feels likes it's yours."
 
@@ -32,9 +32,8 @@ def fixed_civic(screen):
 
 
 
-	# =============================================================================================================================== #
-	# === IMAGES ==================================================================================================================== #
-
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ IMAGES ═══════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	""" Blue Civic in garage """
 	garage_with_civic = pygame.image.load("assets/blue_civic_in_garage.png")
 	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
@@ -45,8 +44,8 @@ def fixed_civic(screen):
 
 
 
-	# =============================================================================================================================== #
-	# === GAME LOOP ================================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ GAME LOOP ════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	running = True
 	while running:
 		for event in pygame.event.get():
@@ -59,6 +58,8 @@ def fixed_civic(screen):
 					if is_hovered(continue_arrow_rect):
 						cruising.start_cruising(screen)
 
+
+		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
 		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
@@ -66,7 +67,10 @@ def fixed_civic(screen):
 
 		text_wrap(screen, beginning_fixed_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		text_wrap(screen, beginning_fixed_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
+
+		# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
 		cursor_changed = False
 
 		if is_hovered(continue_arrow_rect):
@@ -86,6 +90,8 @@ def fixed_civic(screen):
 
 		if not cursor_changed:
 			pygame.mouse.set_cursor(arrow_cursor)
+		# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
+
 
 		pygame.display.flip()
 

@@ -9,15 +9,14 @@ import beginning
 pygame.init()
 
 
-
 # Define cursors
 arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
 hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 
-# =========================================================================== #
-# === Main Menu images ====================================================== #
+# ═══════════════════════════════════════════════════════════════════════════ #
+# ═══ IMAGES ════════════════════════════════════════════════════════════════ #
 background = pygame.image.load("assets/main_menu/background.png")
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 
@@ -35,8 +34,8 @@ exit_game_rect = exit_game_image.get_rect(center=(WIDTH // 2, HEIGHT // 1.15))
 
 
 
-# =========================================================================== #
-# === Shimmer function ====================================================== #
+# ═══════════════════════════════════════════════════════════════════════════ #
+# ═══ SHIMMER FUNCTION ══════════════════════════════════════════════════════ #
 
 """ Initialize shimmer progress """
 shimmer_progress_new = 0
@@ -50,8 +49,8 @@ hovered_exit = False
 
 
 
-# ============================================================================================= #
-# === 'MAIN' GAME LOOP ======================================================================== #
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+# ═══ GAME LOOP ════════════════════════════════════════════════════════════════════════════════════════════════════ #
 running = True
 while running:
 	for event in pygame.event.get():
@@ -79,10 +78,13 @@ while running:
 	screen.blit(load_game_image, load_game_rect)			# Display Load Game text image
 	screen.blit(exit_game_image, exit_game_rect)			# Display Exit Game text image
 
-	cursor_changed = False
+	cursor_changed = False									# Set default state of system cursor
 
 
-	# 'New Game' button shimmer effect
+
+	# ═══ ↓↓↓ Main Menu buttons with shimmer effects ↓↓↓ ══════════════════════════════════════ #
+
+	# ─── ▼ 'New Game' button shimmer effect ▼ ──────────────────────────────────── #
 	if is_hovered(new_game_rect):
 		if not hovered_new:
 			shimmer_progress_new = 0
@@ -97,9 +99,11 @@ while running:
 
 	else:
 		hovered_new = False
+	# ─── ▲ 'New Game' button shimmer effect ▲ ──────────────────────────────────── #
 
 
-	# 'Load Game' button shimmer effect
+
+	# ─── ▼ 'Load Game' button shimmer effect ▼ ─────────────────────────────────── #
 	if is_hovered(load_game_rect):
 		if not hovered_load:
 			shimmer_progress_load = 0
@@ -115,9 +119,11 @@ while running:
 
 	else:
 		hovered_load = False
+	# ─── ▲ 'Load Game' button shimmer effect ▲ ─────────────────────────────────── #
 
 
-	# 'Exit Game' button shimmer effect
+
+	# ─── ▼ 'Exit Game' button shimmer effect ▼ ─────────────────────────────────── #
 	if is_hovered(exit_game_rect):
 		if not hovered_exit:
 			shimmer_progress_exit = 0
@@ -137,7 +143,11 @@ while running:
 	if not cursor_changed:
 		""" Change to 'arrow' cursor when not hovering over a selectable item """
 		pygame.mouse.set_cursor(arrow_cursor)
-	
+	# ─── ▲ 'Exit Game' button shimmer effect ▲ ─────────────────────────────────── #
+
+	# ═══ ↑↑↑ Main Menu buttons with shimmer effects ↑↑↑ ══════════════════════════════════════ #
+
+
 	pygame.display.flip()
 
 pygame.quit()

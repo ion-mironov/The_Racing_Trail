@@ -12,19 +12,19 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 
-# =========================================================================== #
-# === Level images, dialogue text, and game loop ============================ #
+# ═══════════════════════════════════════════════════════════════════════════ #
+# ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
 def start_beginning(screen):
 
-	# =============================================================================================================================== #
-	# === SHIMMER FUNCTION ========================================================================================================== #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ SHIMMER FUNCTION ═════════════════════════════════════════════════════════════════════════════════════════════ #
 	shimmer_progress_continue = 0		# Initialize shimmer progress
 	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
 
 
 
-	# =============================================================================================================================== #
-	# === DIALOGUE TEXT ============================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ DIALOGUE TEXT ════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.Font(None, 40)
 	beginning_text_surface = font.render("A New Beginning", True, (CYAN))
 	beginning_text_rect = beginning_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
@@ -36,9 +36,9 @@ def start_beginning(screen):
 
 
 
-	# =============================================================================================================================== #
-	# === IMAGES ==================================================================================================================== #
-	""" Yellow Civic in garage """
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ IMAGES ═══════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	""" Red Civic in garage """
 	garage_with_civic = pygame.image.load("assets/red_civic_in_garage.png")
 	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
 
@@ -48,8 +48,8 @@ def start_beginning(screen):
 
 
 
-	# =============================================================================================================================== #
-	# === GAME LOOP ================================================================================================================= #
+	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ GAME LOOP ════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	running = True
 	while running:
 		for event in pygame.event.get():
@@ -63,10 +63,10 @@ def start_beginning(screen):
 					if is_hovered(continue_arrow_rect):
 						beginning_fixing.start_fixing(screen)
 
+
+		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
-
-		# Display images at their predefined position
 		screen.blit(beginning_text_surface, beginning_text_rect)
 		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
@@ -75,11 +75,12 @@ def start_beginning(screen):
 		# Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line
 		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
-
+		# ─── ▼ 'Continue' arrow shimmer effect ▼ ──────────────────────────────────── #
+		# Set default state of system cursor
 		cursor_changed = False
-
-		""" 'Continue' arrow shimmer effect """
+		
 		if is_hovered(continue_arrow_rect):
 			if not hovered_continue:
 				shimmer_progress_continue = 0
@@ -97,6 +98,7 @@ def start_beginning(screen):
 		
 		if not cursor_changed:
 			pygame.mouse.set_cursor(arrow_cursor)
+		# ─── ▲ 'Continue' arrow shimmer effect ▲ ──────────────────────────────────── #
 
 
 		pygame.display.flip()
