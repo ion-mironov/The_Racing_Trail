@@ -1,6 +1,6 @@
 <p align="center"><strong>This ReadMe is a work-in-progress and will change as the game advances in its development.</strong></p>
 
-![Pixel art of a sports care on a road with a mountain background](https://github.com/ion-mironov/The_Racing_Trail/blob/main/assets/background.png)
+![Pixel art of a sports car on a road with a mountain background](https://github.com/ion-mironov/The_Racing_Trail/blob/main/assets/main_menu/background.png)
 
 The Racing Trail is a racing game inspired by The Oregon Trail and is a text-based, choose-your-own-adventure where you can do random races (drifting, drag racing, circuit racing, and sprints) at varying difficulties. Winning races will net you cash prices and/or parts that you can use to upgrade your car. Along your journey, you'll experience random events such as having car troubles, finding hidden money caches, and even finding abandoned cars with useable parts!
 
