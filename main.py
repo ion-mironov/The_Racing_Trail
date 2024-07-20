@@ -1,6 +1,5 @@
 import pygame
 
-from animations import *
 from game_functions import *
 from parameters import *
 import beginning

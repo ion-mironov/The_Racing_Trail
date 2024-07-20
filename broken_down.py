@@ -26,6 +26,7 @@ def broken_down_civic(screen):
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.SysFont('Arial', 24)
 	broken_down_text = font.render("You suffered a puncture!", True, WHITE)
+	broken_down_text_rect = broken_down_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 3))
 
 
 
@@ -62,7 +63,7 @@ def broken_down_civic(screen):
 		screen.blit(broken_down_civic, broken_down_civic_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 
-		text_wrap(screen, broken_down_text, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		screen.blit(broken_down_text, broken_down_text_rect)
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
 
@@ -75,7 +76,7 @@ def broken_down_civic(screen):
 				hovered_continue = True
 
 			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.02
+				shimmer_progress_continue += 0.005
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
 
 			pygame.mouse.set_cursor(hand_cursor)
