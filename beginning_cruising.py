@@ -3,7 +3,7 @@ import pygame
 
 from game_functions import *
 from parameters import *
-import broken_down
+import beginning_broken_down
 
 
 
@@ -77,7 +77,7 @@ def start_cruising(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						broken_down.broken_down_civic(screen)
+						beginning_broken_down.broken_down_civic(screen)
 
 
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
