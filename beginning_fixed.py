@@ -3,7 +3,7 @@ import pygame
 
 from game_functions import *
 from parameters import *
-import beginning_cruising
+import beginning_day_cruising
 
 
 
@@ -57,7 +57,7 @@ def fixed_civic(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						beginning_cruising.start_cruising(screen)
+						beginning_day_cruising.start_cruising(screen)
 
 
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #

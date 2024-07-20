@@ -4,7 +4,7 @@ import pygame
 
 from game_functions import *
 from parameters import *
-import beginning_wheel_changed
+import beginning_night_cruising
 
 
 
@@ -78,7 +78,7 @@ def changing_wheel(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						beginning_wheel_changed.end_current_progress(screen)
+						beginning_night_cruising.end_current_progress(screen)
 
 
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
