@@ -16,18 +16,18 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 # ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
 def start_beginning(screen):
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ SHIMMER FUNCTION ═════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ SHIMMER FUNCTION ══════════════════════════════════════════════════════════════════════════════════════════════ #
 	shimmer_progress_continue = 0		# Initialize shimmer progress
 	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
 
 
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ DIALOGUE TEXT ════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.Font(None, 40)
-	beginning_text_surface = font.render("A New Beginning", True, (CYAN))
-	beginning_text_rect = beginning_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
+	beginning_text = font.render("A New Beginning", True, (CYAN))
+	beginning_text_rect = beginning_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
 
 	font = pygame.font.SysFont('Arial', 20)
 	beginning_dialogue_1 = "You're a newly-graduated college student living in Pennsylvania, USA. During those years of boring college courses, you watched a lot of clichéd car racing-themed movies and played similar games to pass the time. Now that you're free, you wondered if it was possible to go out and live a life of racing against others and making it big in the car-racing world. As a graduation gift, your dad gives you his old, but trusty, 1997 Honda Civic hatchback; and this is when you felt it was a sign to turn that dream into a reality."
@@ -36,8 +36,8 @@ def start_beginning(screen):
 
 
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ IMAGES ═══════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ IMAGES ════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	""" Red Civic in garage """
 	garage_with_civic = pygame.image.load("assets/red_civic_in_garage.png")
 	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
@@ -48,8 +48,8 @@ def start_beginning(screen):
 
 
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ GAME LOOP ════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ GAME LOOP ═════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	running = True
 	while running:
 		for event in pygame.event.get():
@@ -67,7 +67,7 @@ def start_beginning(screen):
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
-		screen.blit(beginning_text_surface, beginning_text_rect)
+		screen.blit(beginning_text, beginning_text_rect)
 		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 

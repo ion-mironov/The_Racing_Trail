@@ -24,20 +24,19 @@ def load_frames(folder, prefix):
 	return frames
 
 
-
 # ═══════════════════════════════════════════════════════════════════════════ #
 # ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
 def start_fixing(screen):
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ SHIMMER FUNCTION ═════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ SHIMMER FUNCTION ══════════════════════════════════════════════════════════════════════════════════════════════ #
 	shimmer_progress_continue = 0		# Initialize shimmer progress
 	hovered_continue = False			# Check if cursor is over 'continue' arrow (used to reset hover effect)
 
 
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ ANIMATION ════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ ANIMATION ═════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	""" Define image frames for animation """
 	frames = load_frames("assets/civic_fix/", "frame_")			# Load all frames for the animation from specified folder; filenames start with 'frame_'
 	frame_count = len(frames)									# Calculate number of frames in list; returns length of list and stored into 'frame_count'
@@ -52,41 +51,41 @@ def start_fixing(screen):
 
 
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ DIALOGUE TEXT ════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.SysFont('Arial', 24)
-	you_tried_text_surface = font.render("Well, at least you tried...", True, WHITE)
-	you_tried_text_rect = you_tried_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.7))
+	you_tried_text = font.render("Well, at least you tried...", True, WHITE)
+	you_tried_text_rect = you_tried_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.7))
 
-	you_fixed_it_text_surface = font.render("But, after a few hours of swearing and spending what little money you had, you finally got the car to your liking.", True, WHITE)
-	you_fixed_it_text_rect = you_fixed_it_text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.1))
+	you_fixed_it_text = font.render("But, after a few hours of swearing and spending what little money you had, you finally got the car to your liking.", True, WHITE)
+	you_fixed_it_text_rect = you_fixed_it_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.1))
 
 
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ 'CONTINUE' ARROW ═════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ 'CONTINUE' ARROW ══════════════════════════════════════════════════════════════════════════════════════════════ #
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
 
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ ANIMATION STATES ═════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ ANIMATION STATES ══════════════════════════════════════════════════════════════════════════════════════════════ #
 	animation_completed = False
 	you_tried_displayed = False
 	text_displayed_time = 0
 
 
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ TIME DELAYS  ═════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ TIME DELAYS  ══════════════════════════════════════════════════════════════════════════════════════════════════ #
 	animation_end_time = 1000	# milliseconds
 	second_text_delay =  1500	# milliseconds
 
 
 
-	# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ GAME LOOP ════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ GAME LOOP ═════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	running = True
 	while running:
 		for event in pygame.event.get():
@@ -125,13 +124,13 @@ def start_fixing(screen):
 		# Display dialogue text once the animation's last frame has displayed AND first time-delay has passed
 		if animation_completed:
 			if now - text_displayed_time > animation_end_time:
-				screen.blit(you_tried_text_surface, you_tried_text_rect)
+				screen.blit(you_tried_text, you_tried_text_rect)
 				you_tried_displayed = True
 
 
 		# Display 'Continue' arrow AND the second dialogue text AFTER the first dialogue has displayed AND second time-delay has passed
 		if you_tried_displayed and now - text_displayed_time > animation_end_time + second_text_delay:
-			screen.blit(you_fixed_it_text_surface, you_fixed_it_text_rect)
+			screen.blit(you_fixed_it_text, you_fixed_it_text_rect)
 			screen.blit(continue_arrow, continue_arrow_rect.topleft)
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 

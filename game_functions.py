@@ -1,6 +1,6 @@
 import pygame
 
-""" Use this to allow the wrapping of text found in multiple dialogues """
+# ═══ ▼ TEXT WRAP FUNCTION ▼ ════════════════════════════════════════════════════════════════════════════════════════ #
 def text_wrap(screen, text, position, font, color, max_width):
 	words = text.split(" ")
 	lines = []
@@ -19,16 +19,19 @@ def text_wrap(screen, text, position, font, color, max_width):
 		text_surface = font.render(line, True, color)
 		text_rect = text_surface.get_rect(topleft=(position[0], position[1] + i * font.get_linesize()))
 		screen.blit(text_surface, text_rect)
+# ═══ ▲ TEXT WRAP FUNCTION ▲ ════════════════════════════════════════════════════════════════════════════════════════ #
 
 
-# ========================================================================================================= #
-# Check if mouse cursor hovers over image to initiate shimmer effect
+
+# ═══ ▼ SHIMMER EFFECT ▼ ════════════════════════════════════════════════════════════════════════════════════════════ #
+
+# ─── Check if mouse cursor is hovering over image ──────────────────────────────────── #
 def is_hovered(rect):
 	mouse_pos = pygame.mouse.get_pos()
 	return rect.collidepoint(mouse_pos)
 
 
-""" Shimmer hover effect """
+# ─── Shimmer effect ────────────────────────────────────────────────────────────────── #
 def draw_shimmer(surface, rect, progress):
 	# Create a translucent white surface
 	shimmer_surface = pygame.Surface((rect.width, rect.height), pygame.SRCALPHA)
@@ -45,3 +48,4 @@ def draw_shimmer(surface, rect, progress):
 
 	# Draw the shimmer surface onto the main surface
 	surface.blit(shimmer_surface, rect.topleft)
+# ═══ ▲ SHIMMER EFFECT ▲ ════════════════════════════════════════════════════════════════════════════════════════════ #
