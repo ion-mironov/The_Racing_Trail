@@ -1,3 +1,4 @@
+from sys import exit
 import pygame
 
 from game_functions import *

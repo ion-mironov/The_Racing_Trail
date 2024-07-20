@@ -1,3 +1,4 @@
+from sys import exit
 import pygame
 
 from game_functions import *
@@ -7,7 +8,7 @@ from parameters import *
 
 # Define cursors
 arrow_cursor = pygame.SYSTEM_CURSOR_ARROW
-hand_cursor = pygame.SYSTEM_CURSOR_HAND
+
 
 # ═══════════════════════════════════════════════════════════════════════════ #
 # ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
@@ -24,6 +25,7 @@ def end_current_progress(screen):
 	# ═══ GAME LOOP ═════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	running = True
 	while running:
+		pygame.mouse.set_cursor(arrow_cursor)
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				pygame.quit()
