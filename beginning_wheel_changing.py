@@ -39,7 +39,7 @@ def changing_wheel(screen):
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.SysFont('Arial', 24)
-	wheel_change_text = "So, your first official cruise towards your dream hit a snag as you ran across something in the road which blew your tire. Fortunately, you had a spare for such an occasion and quickly break out the tools to change out your wheel."
+	wheel_change_text = "So, your initial cruise towards your dream hit a snag as you ran across something in the road which blew your tire. Fortunately, you had a spare for such an eventuality and quickly break out the tools to change out your wheel."
 
 
 
@@ -78,7 +78,7 @@ def changing_wheel(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						beginning_night_cruising.end_current_progress(screen)
+						beginning_night_cruising.night_cruising(screen)
 
 
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
