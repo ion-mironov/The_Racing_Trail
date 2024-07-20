@@ -2,7 +2,7 @@ import pygame
 
 from game_functions import *
 from parameters import *
-
+import beginning_wheel_changing
 
 
 # Define cursors
@@ -54,7 +54,7 @@ def broken_down_civic(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						pass
+						beginning_wheel_changing.changing_wheel(screen)
 
 
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
