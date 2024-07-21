@@ -59,7 +59,7 @@ def test_cruising(screen):
 
 
 	# Define random event interval
-	event_probability = 0.5								# Adjust to control the frequency of the pop-up.
+	event_probability = 0.5								# 50% chance of event being `True``
 	last_event_check = pygame.time.get_ticks()
 
 
@@ -94,8 +94,9 @@ def test_cruising(screen):
 						pass
 
 					if popup_visible and button_rect.collidepoint(event.pos):
-						popup_visible = False		# Close the pop-up
+						popup_visible = False							# Close the pop-up
 						print("Pop-up closed")
+						last_event_check = pygame.time.get_ticks()		# Reset the event check timer
 
 
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
@@ -111,35 +112,12 @@ def test_cruising(screen):
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
 
-		# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
-		cursor_changed = False
-
-		if is_hovered(continue_arrow_rect):
-			if not hovered_continue:
-				shimmer_progress_continue = 0
-				hovered_continue = True
-
-			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.005
-				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
-
-			pygame.mouse.set_cursor(hand_cursor)
-			cursor_changed = True
-
-		else:
-			hovered_continue = False
-
-		if not cursor_changed:
-			pygame.mouse.set_cursor(arrow_cursor)
-		# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
-
-
 		# ─── ▼ Pop-up Window and its parameters ▼ ────────────────────────────────── #
 		# Randomly show the pop-up
-		if not popup_visible and now - last_event_check > 3000:			# Check every 3 seconds
-			last_event_check = now
-			if random.random() < event_probability:
-				popup_visible = True
+		if not popup_visible and now - last_event_check > 3000:			# Checks if 5 seconds have passed since the last event check and if no pop-up is currently visible
+			last_event_check = now										# Updates to current time; ensures timer for checking the next event starts from this point
+			if random.random() < event_probability:						# Random float value between 0 and 1, compares to 0.5 defined earlier
+				popup_visible = True									# Display a pop-up window if above condition is met
 				print("Pop-up triggered")
 
 		# Display pop-up window
@@ -147,7 +125,7 @@ def test_cruising(screen):
 			popup_text = "This is some text!"
 			popup_width, popup_height = 300, 150
 			popup_surface = pygame.Surface((popup_width, popup_height))
-			popup_surface.fill((255, 0, 0))  # Opaque red background
+			popup_surface.fill((13, 17, 23))
 			popup_rect = popup_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
 
 			# Draw border
@@ -171,7 +149,31 @@ def test_cruising(screen):
 			button_text = font.render("Close", True, BLACK)
 			button_text_rect = button_text.get_rect(center=button_rect.center)
 			screen.blit(button_text, button_text_rect)
-		# ─── ▲ Pop-up Window control ▲ ───────────────────────────────────────────── #
+		# ─── ▲ Pop-up Window and its parameters ▲ ────────────────────────────────── #
+
+
+
+		# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
+		cursor_changed = False
+
+		if is_hovered(continue_arrow_rect):
+			if not hovered_continue:
+				shimmer_progress_continue = 0
+				hovered_continue = True
+
+			if shimmer_progress_continue < 1:
+				shimmer_progress_continue += 0.005
+				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
+
+			pygame.mouse.set_cursor(hand_cursor)
+			cursor_changed = True
+
+		else:
+			hovered_continue = False
+
+		if not cursor_changed:
+			pygame.mouse.set_cursor(arrow_cursor)
+		# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
 
 
 		pygame.display.flip()
