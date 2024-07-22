@@ -25,7 +25,7 @@ def broken_down_civic(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.SysFont("Arial", 24)
+	font = pygame.font.Font("assets/arial.ttf", 24)
 	broken_down_text = font.render("You suffered a puncture!", True, WHITE)
 	broken_down_text_rect = broken_down_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 3))
 

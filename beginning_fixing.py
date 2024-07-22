@@ -54,12 +54,9 @@ def start_fixing(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.SysFont("Arial", 24)
-	you_tried_text = font.render("Well, at least you tried...", True, WHITE)
-	you_tried_text_rect = you_tried_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.7))
-
-	you_fixed_it_text = font.render("But, after a few hours of swearing and spending what little money you had, you finally got the car to your liking.", True, WHITE)
-	you_fixed_it_text_rect = you_fixed_it_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.1))
+	font = pygame.font.Font("assets/arial.ttf", 22)
+	you_tried_text = "Well, at least you tried..."
+	you_fixed_it_text = "But, after a few hours of swearing and spending what little money you had, you finally got the car to your liking."
 
 
 
@@ -125,13 +122,13 @@ def start_fixing(screen):
 		# Display dialogue text once the animation's last frame has displayed AND first time-delay has passed
 		if animation_completed:
 			if now - text_displayed_time > animation_end_time:
-				screen.blit(you_tried_text, you_tried_text_rect)
+				text_wrap(screen, you_tried_text, (screen.get_width() // 10, screen.get_height() // 2.7), font, WHITE, screen.get_width() - screen.get_width() // 5)
 				you_tried_displayed = True
 
 
 		# Display 'Continue' arrow AND the second dialogue text AFTER the first dialogue has displayed AND second time-delay has passed
 		if you_tried_displayed and now - text_displayed_time > animation_end_time + second_text_delay:
-			screen.blit(you_fixed_it_text, you_fixed_it_text_rect)
+			text_wrap(screen, you_fixed_it_text, (screen.get_width() // 10, screen.get_height() // 2.1), font, WHITE, screen.get_width() - screen.get_width() // 5)
 			screen.blit(continue_arrow, continue_arrow_rect.topleft)
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 

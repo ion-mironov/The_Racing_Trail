@@ -26,12 +26,8 @@ def start_beginning(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.Font(None, 40)
-	beginning_text = font.render("A New Beginning", True, (CYAN))
-	beginning_text_rect = beginning_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
-
-	font = pygame.font.SysFont("Arial", 20)
-	beginning_dialogue_1 = "You're a newly-graduated college student living in Pennsylvania, USA. During those years of boring college courses, you watched a lot of clichéd car racing-themed movies and played similar games to pass the time. Now that you're free, you wondered if it was possible to go out and live a life of racing against others and making it big in the car-racing world. As a graduation gift, your dad gives you his old, but trusty, 1997 Honda Civic hatchback; and this is when you felt it was a sign to turn that dream into a reality."
+	font = pygame.font.Font("assets/arial.ttf", 20)
+	beginning_dialogue_1 = "You're a newly-graduated college student living in Pennsylvania, USA. During those years of boring college courses, you watched a lot of clichéd car-racing-themed movies and played similar games to pass the time. Now that you're free, you wonder if it's possible to go out and make it big in the street racing world. As a graduation gift, your dad gives you his old, but trusty, 1997 Honda Civic; and this is when you felt it was a sign to turn that dream into a reality."
 
 	beginning_dialogue_2 = "You decide that a few changes to the car need to be made, so you begin to get your hands dirty..."
 
@@ -68,18 +64,18 @@ def start_beginning(screen):
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
-		screen.blit(beginning_text, beginning_text_rect)
 		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 
 
-		# Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line
-		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		""" Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line """
+		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 40), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
+
 		# ─── ▼ 'Continue' arrow shimmer effect ▼ ──────────────────────────────────── #
-		# Set default state of system cursor
+		""" Set default state of system cursor """
 		cursor_changed = False
 		
 		if is_hovered(continue_arrow_rect):

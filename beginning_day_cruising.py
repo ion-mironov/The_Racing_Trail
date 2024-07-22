@@ -38,7 +38,7 @@ def start_cruising(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.SysFont("Arial", 24)
+	font = pygame.font.Font("assets/arial.ttf", 20)
 	cruising_text = "You grin from ear to ear as you cruise down the road, tunes thumping from the radio as your car glides along the pavement, the engine and exhaust note both complementing each other as all your modifications work in perfect harmony."
 
 
@@ -92,7 +92,7 @@ def start_cruising(screen):
 		screen.blit(frames[current_frame], civic_cruising_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 
-		text_wrap(screen, cruising_text, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, cruising_text, (screen.get_width() // 10, screen.get_height() // 5), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
 

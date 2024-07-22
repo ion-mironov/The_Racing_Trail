@@ -16,7 +16,7 @@ def end_current_progress(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.SysFont("Arial", 24)
+	font = pygame.font.Font("assets/arial.ttf", 22)
 	end_current_progress_text = "That's it so far! Thank you for checking out what I've created up to this point!"
 
 
