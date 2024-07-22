@@ -38,7 +38,7 @@ def start_cruising(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.SysFont('Arial', 24)
+	font = pygame.font.SysFont("Arial", 24)
 	cruising_text = "You grin from ear to ear as you cruise down the road, tunes thumping from the radio as your car glides along the pavement, the engine and exhaust note both complementing each other as all your modifications work in perfect harmony."
 
 

@@ -38,7 +38,7 @@ def changing_wheel(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.SysFont('Arial', 24)
+	font = pygame.font.SysFont("Arial", 24)
 	wheel_change_text = "So, your initial cruise towards your dream hit a snag as you ran across something in the road which blew your tire. Fortunately, you had a spare for such an eventuality and quickly break out the tools to change out your wheel."
 
 

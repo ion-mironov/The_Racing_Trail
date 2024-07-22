@@ -54,7 +54,7 @@ def start_fixing(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.SysFont('Arial', 24)
+	font = pygame.font.SysFont("Arial", 24)
 	you_tried_text = font.render("Well, at least you tried...", True, WHITE)
 	you_tried_text_rect = you_tried_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2.7))
 

@@ -38,7 +38,7 @@ def night_cruising(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.SysFont('Arial', 24)
+	font = pygame.font.SysFont("Arial", 24)
 	night_cruising_text = "By the time you're done, the sun has begun to set and you once again begin your journey, this time into the night."
 
 

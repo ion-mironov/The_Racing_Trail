@@ -30,7 +30,7 @@ def start_beginning(screen):
 	beginning_text = font.render("A New Beginning", True, (CYAN))
 	beginning_text_rect = beginning_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 20))
 
-	font = pygame.font.SysFont('Arial', 20)
+	font = pygame.font.SysFont("Arial", 20)
 	beginning_dialogue_1 = "You're a newly-graduated college student living in Pennsylvania, USA. During those years of boring college courses, you watched a lot of clichéd car racing-themed movies and played similar games to pass the time. Now that you're free, you wondered if it was possible to go out and live a life of racing against others and making it big in the car-racing world. As a graduation gift, your dad gives you his old, but trusty, 1997 Honda Civic hatchback; and this is when you felt it was a sign to turn that dream into a reality."
 
 	beginning_dialogue_2 = "You decide that a few changes to the car need to be made, so you begin to get your hands dirty..."

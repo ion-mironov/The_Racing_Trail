@@ -111,7 +111,7 @@ def test_cruising(screen):
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
 
-		# ─── ▼ Pop-up Window and its parameters ▼ ────────────────────────────────── #
+		# ─── ▼ Pop-up window and its parameters ▼ ────────────────────────────────── #
 		# Randomly show the pop-up
 		if not popup_visible and now - last_event_check > 2000:			# Checks if 5 seconds have passed since the last event check and if no pop-up is currently visible
 			last_event_check = now										# Updates to current time; resets timer for checking the next event from this point
@@ -126,7 +126,7 @@ def test_cruising(screen):
 			popup_surface.fill((13, 17, 23))
 			popup_rect = popup_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
 
-			# Draw border
+			# Create border and display it behind pop-up window
 			border_rect = pygame.Rect(
 				popup_rect.left - border_thickness,
 				popup_rect.top - border_thickness,
@@ -137,17 +137,17 @@ def test_cruising(screen):
 
 			screen.blit(popup_surface, popup_rect)
 
-			font = pygame.font.SysFont('Arial', 24)
+			font = pygame.font.SysFont("Arial", 24)
 			text_surface = font.render(popup_text, True, WHITE)
 			text_rect = text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - 20))
 			screen.blit(text_surface, text_rect)
 
-			# Draw button
+			# Create button and then display it
 			pygame.draw.rect(screen, WHITE, button_rect)
 			button_text = font.render("Close", True, BLACK)
 			button_text_rect = button_text.get_rect(center=button_rect.center)
 			screen.blit(button_text, button_text_rect)
-		# ─── ▲ Pop-up Window and its parameters ▲ ────────────────────────────────── #
+		# ─── ▲ Pop-up window and its parameters ▲ ────────────────────────────────── #
 
 
 

@@ -26,7 +26,7 @@ def fixed_civic(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.SysFont('Arial', 20)
+	font = pygame.font.SysFont("Arial", 20)
 	beginning_fixed_dialogue_1 = "You installed a new Cold Air Intake (CAI) kit and stainless steel cat-back exhaust, taking the car's stock engine with its 106 horsepower and 103 lb-ft of torque up to a more acceptable 166 HP and 159 lb-ft of torque. Along with that, you also gave it a new splash of paint, a lowered suspension, and some custom wheels. Now, the car finally feels likes it's yours."
 
 	beginning_fixed_dialogue_2 = "Now, it is time to hit the open road and head west!"
