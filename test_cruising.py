@@ -93,10 +93,9 @@ def test_cruising(screen):
 					if is_hovered(continue_arrow_rect):
 						pass
 
-					if popup_visible and button_rect.collidepoint(event.pos):
-						popup_visible = False							# Close the pop-up
-						print("Pop-up closed")
-						last_event_check = pygame.time.get_ticks()		# Reset the event check timer
+					if popup_visible and button_rect.collidepoint(event.pos):	# If pop-up is visible and button is clicked on
+						popup_visible = False									# Close the pop-up
+						last_event_check = pygame.time.get_ticks()				# Reset the event check timer
 
 
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
@@ -114,11 +113,10 @@ def test_cruising(screen):
 
 		# ─── ▼ Pop-up Window and its parameters ▼ ────────────────────────────────── #
 		# Randomly show the pop-up
-		if not popup_visible and now - last_event_check > 3000:			# Checks if 5 seconds have passed since the last event check and if no pop-up is currently visible
-			last_event_check = now										# Updates to current time; ensures timer for checking the next event starts from this point
+		if not popup_visible and now - last_event_check > 2000:			# Checks if 5 seconds have passed since the last event check and if no pop-up is currently visible
+			last_event_check = now										# Updates to current time; resets timer for checking the next event from this point
 			if random.random() < event_probability:						# Random float value between 0 and 1, compares to 0.5 defined earlier
 				popup_visible = True									# Display a pop-up window if above condition is met
-				print("Pop-up triggered")
 
 		# Display pop-up window
 		if popup_visible:
