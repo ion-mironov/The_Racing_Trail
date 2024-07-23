@@ -3,7 +3,7 @@ import pygame
 
 from game_functions import *
 from parameters import *
-import truck_interior_and_civic
+import current_progress
 
 
 
@@ -15,7 +15,7 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 # ═══════════════════════════════════════════════════════════════════════════ #
 # ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
-def merchant_truck(screen):
+def truck_interior(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ SHIMMER FUNCTION ══════════════════════════════════════════════════════════════════════════════════════════════ #
@@ -27,16 +27,14 @@ def merchant_truck(screen):
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.Font("assets/arial.ttf", 20)
-	truck_encounter_dialogue_1 = "After a few miles, you come across a truck with a strangely familiar logo on its side and an equally strangely familiar masked occupant in the driver's seat. As you get closer, the back door of the truck opens up and you see a slew of car parts and mechanic's tools. You then notice that the driver, wearing a long, thick leather coat and purple mask, is now suddenly outside your window."
-
-	truck_encounter_dialogue_2 = "\"Welcome!\", he says in a hard-to-pinpoint accent. \"Come inside! Got a selection of good things on sale, stranger!\""
+	truck_interior_dialogue = "Even though you never met this man, despite a nagging feeling that you've seen him before, you decide it's perfectly fine and drive your car up the loading ramps and into the truck's interior."
 
 
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ IMAGES ════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# Red Civic in garage
-	truck_interior = pygame.image.load("assets/truck_and_civic_night.png")
+	truck_interior = pygame.image.load("assets/truck_interior_and_civic.png")
 	truck_interior_rect = truck_interior.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
 
 
@@ -60,14 +58,13 @@ def merchant_truck(screen):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						truck_interior_and_civic.truck_interior(screen)
+						pass
 
 
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
-		text_wrap(screen, truck_encounter_dialogue_1, (screen.get_width() // 10, screen.get_height() // 20), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		text_wrap(screen, truck_encounter_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, truck_interior_dialogue, (screen.get_width() // 10, screen.get_height() // 20), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
 		screen.blit(truck_interior, truck_interior_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
@@ -84,7 +81,7 @@ def merchant_truck(screen):
 				hovered_continue = True
 
 			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.007
+				shimmer_progress_continue += 0.015
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
 
 			pygame.mouse.set_cursor(hand_cursor)
