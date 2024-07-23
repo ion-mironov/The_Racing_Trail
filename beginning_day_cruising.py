@@ -105,7 +105,7 @@ def start_cruising(screen):
 				hovered_continue = True
 
 			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.005
+				shimmer_progress_continue += 0.006
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
 
 			pygame.mouse.set_cursor(hand_cursor)

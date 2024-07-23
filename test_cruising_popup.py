@@ -55,20 +55,22 @@ def test_cruising(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ POP-UP WINDOW ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	popup_visible = False								# Flag to control pop-up window's default state.
-
+	popup_visible = False											# Pop-up window's default state.
 
 	# Define random event interval
-	event_probability = 0.5								# 50% chance of event being `True``
+	event_probability = 0.5											# 50% chance of event being `True`
 	last_event_check = pygame.time.get_ticks()
-
 
 	# Define pop-up window
 	button_rect = pygame.Rect(screen.get_width() // 2 - 50, screen.get_height() // 2 + 20, 100, 30)
 
 	# Define border properties
-	border_color = (255, 255, 255)						# White border
+	border_color = (255, 255, 255)									# White border
 	border_thickness = 5
+
+	# Load pop-up image
+	popup_image = pygame.image.load("assets/merchant_bust.png")
+	popup_image_rect = popup_image.get_rect(center=(150, 75))		# Center it within the pop-up surface
 
 
 
@@ -120,10 +122,11 @@ def test_cruising(screen):
 
 		# Display pop-up window
 		if popup_visible:
-			popup_text = "This is some text!"
+			popup_text = "What're ya buyin'?"
 			popup_width, popup_height = 300, 150
 			popup_surface = pygame.Surface((popup_width, popup_height))
 			popup_surface.fill((13, 17, 23))
+			popup_surface.blit(popup_image, popup_image_rect)			# Display image onto the pop-up surface
 			popup_rect = popup_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
 
 			# Create border and display it behind pop-up window
@@ -137,7 +140,7 @@ def test_cruising(screen):
 
 			screen.blit(popup_surface, popup_rect)
 
-			font = pygame.font.SysFont("Arial", 24)
+			font = pygame.font.Font("assets/arial.ttf", 24)
 			text_surface = font.render(popup_text, True, WHITE)
 			text_rect = text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - 20))
 			screen.blit(text_surface, text_rect)

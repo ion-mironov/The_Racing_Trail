@@ -35,13 +35,16 @@ def start_beginning(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ IMAGES ════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	""" Red Civic in garage """
+	# Red Civic in garage
 	garage_with_civic = pygame.image.load("assets/red_civic_in_garage.png")
 	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
 
-	""" 'Continue' arrow button """
+
+
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ 'CONTINUE' ARROW ══════════════════════════════════════════════════════════════════════════════════════════════ #
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
-	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))	# Display arrow at bottom right corner of screen
+	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
 
 
@@ -61,17 +64,17 @@ def start_beginning(screen):
 						beginning_fixing.start_fixing(screen)
 
 
+
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
+		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 20), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
+
 		screen.blit(garage_with_civic, garage_with_civic_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
-
-
-		""" Use 'text_wrap' function to display text at a set position and have it auto-wrap to the next line """
-		text_wrap(screen, beginning_dialogue_1, (screen.get_width() // 10, screen.get_height() // 40), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		text_wrap(screen, beginning_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
+
 
 
 		# ─── ▼ 'Continue' arrow shimmer effect ▼ ──────────────────────────────────── #

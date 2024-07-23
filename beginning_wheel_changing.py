@@ -38,7 +38,7 @@ def changing_wheel(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.Font("assets/arial.ttf", 22)
+	font = pygame.font.Font("assets/arial.ttf", 20)
 	wheel_change_text = "So, your initial cruise towards your dream hit a snag as you ran across something in the road which blew your tire. Fortunately, you had a spare for such an eventuality and quickly break out the tools to change out your wheel."
 
 
@@ -92,7 +92,7 @@ def changing_wheel(screen):
 		screen.blit(frames[current_frame], wheel_change_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 
-		text_wrap(screen, wheel_change_text, (screen.get_width() // 10, screen.get_height() // 9), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, wheel_change_text, (screen.get_width() // 10, screen.get_height() // 5), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
 
@@ -105,7 +105,7 @@ def changing_wheel(screen):
 				hovered_continue = True
 
 			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.005
+				shimmer_progress_continue += 0.007
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
 
 			pygame.mouse.set_cursor(hand_cursor)
