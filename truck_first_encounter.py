@@ -29,20 +29,17 @@ def merchant_truck(screen):
 	font = pygame.font.Font("assets/arial.ttf", 20)
 	truck_encounter_dialogue_1 = "After a few miles, you come across a truck with a strangely familiar logo on its side and an equally strangely familiar masked occupant in the driver's seat. As you get closer, the back door of the truck opens up and you see a slew of car parts and mechanic's tools. You then notice that the driver, wearing a long, thick leather coat and purple mask, is now suddenly outside your window."
 
-	truck_encounter_dialogue_2 = "\"Welcome!\", he says in a hard-to-pinpoint accent. \"Come inside! Got a selection of good things on sale, stranger!\""
+	truck_encounter_dialogue_2 = "\"Welcome!\", he says in a hard-to-pinpoint-but-familiar accent. \"Come inside! Got a selection of good things on sale, driver!\""
 
 
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ IMAGES ════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# Red Civic in garage
-	truck_interior = pygame.image.load("assets/truck_and_civic_night.png")
-	truck_interior_rect = truck_interior.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
+	""" Truck and blue Civic at night """
+	truck_civic_night = pygame.image.load("assets/truck_and_civic_night.png")
+	truck_civic_night_rect = truck_civic_night.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
 
-
-
-	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ 'CONTINUE' ARROW ══════════════════════════════════════════════════════════════════════════════════════════════ #
+	""" 'Continue' arrow button """
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
@@ -69,7 +66,7 @@ def merchant_truck(screen):
 		text_wrap(screen, truck_encounter_dialogue_1, (screen.get_width() // 10, screen.get_height() // 20), font, WHITE, screen.get_width() - screen.get_width() // 5)
 		text_wrap(screen, truck_encounter_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
-		screen.blit(truck_interior, truck_interior_rect.topleft)
+		screen.blit(truck_civic_night, truck_civic_night_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 

@@ -45,17 +45,15 @@ def night_cruising(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ ANIMATION ═════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	""" Define image frames for animation """
+	""" Blue Civic cruising at night """
 	frames = load_frames("assets/blue_civic_cruising/", "night_")
 	frame_count = len(frames)
 	current_frame = 0
 
-	""" Timing for frame updates """
 	frame_delay = 100							# milliseconds before displaying next frame in sequence
 	last_update = pygame.time.get_ticks()
 
-	""" Get rect from first image frame to position animation """
-	civic_cruising_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
+	civic_cruising_night_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
 
 
 
@@ -89,7 +87,7 @@ def night_cruising(screen):
 			current_frame = (current_frame + 1) % frame_count
 			last_update = now
 
-		screen.blit(frames[current_frame], civic_cruising_rect.topleft)
+		screen.blit(frames[current_frame], civic_cruising_night_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 
 		text_wrap(screen, night_cruising_text, (screen.get_width() // 10, screen.get_height() // 5), font, WHITE, screen.get_width() - screen.get_width() // 5)

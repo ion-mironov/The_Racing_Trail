@@ -35,14 +35,11 @@ def start_beginning(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ IMAGES ════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# Red Civic in garage
+	""" Red Civic in garage """
 	garage_with_civic = pygame.image.load("assets/red_civic_in_garage.png")
 	garage_with_civic_rect = garage_with_civic.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
 
-
-
-	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ 'CONTINUE' ARROW ══════════════════════════════════════════════════════════════════════════════════════════════ #
+	""" 'Continue' arrow button """
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 

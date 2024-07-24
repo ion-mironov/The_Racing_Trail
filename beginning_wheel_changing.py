@@ -39,7 +39,7 @@ def changing_wheel(screen):
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.Font("assets/arial.ttf", 20)
-	wheel_change_text = "So, your initial cruise towards your dream hit a snag as you ran across something in the road which blew your tire. Fortunately, you had a spare for such an eventuality and quickly break out the tools to change out your wheel."
+	wheel_change_text = "So, your initial cruise towards your dream hit a snag as you ran across something in the road which blew your tire. Fortunately, you had a spare for such an eventuality and quickly break out some basic tools to change out your wheel."
 
 
 

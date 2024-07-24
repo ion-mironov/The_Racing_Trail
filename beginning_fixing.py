@@ -61,14 +61,7 @@ def start_fixing(screen):
 
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ 'CONTINUE' ARROW ══════════════════════════════════════════════════════════════════════════════════════════════ #
-	continue_arrow = pygame.image.load("assets/continue_arrow.png")
-	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
-
-
-
-	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ ANIMATION STATES ══════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ ANIMATION & DIALOGUE STATES ══════════════════════════════════════════════════════════════════════════════════════════════ #
 	animation_completed = False
 	you_tried_displayed = False
 	text_displayed_time = 0
@@ -79,6 +72,13 @@ def start_fixing(screen):
 	# ═══ TIME DELAYS  ══════════════════════════════════════════════════════════════════════════════════════════════════ #
 	animation_end_time = 1000	# milliseconds
 	second_text_delay =  1500	# milliseconds
+
+
+
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ 'CONTINUE' ARROW ══════════════════════════════════════════════════════════════════════════════════════════════ #
+	continue_arrow = pygame.image.load("assets/continue_arrow.png")
+	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
 
 

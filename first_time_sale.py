@@ -3,7 +3,6 @@ import pygame
 
 from game_functions import *
 from parameters import *
-import first_time_sale
 
 
 
@@ -13,9 +12,23 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 
+# Define parts data
+parts = [
+	{"name": "Brakes", "cost": 200, "image": pygame.image.load("assets/brakes.png")},
+	{"name": "Engine", "cost": 1000, "image": pygame.image.load("assets/engine.png")},
+	{"name": "Exhaust System", "cost": 500, "image": pygame.image.load("assets/muffler.png")},
+	{"name": "Performance Tires", "cost": 450, "image": pygame.image.load("assets/wheels.png")},
+]
+
+# Player's money
+player_money = 600
+
+
+
 # ═══════════════════════════════════════════════════════════════════════════ #
 # ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
-def truck_interior(screen):
+def parts_sale(screen):
+	global player_money  # Declare player_money as global
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ SHIMMER FUNCTION ══════════════════════════════════════════════════════════════════════════════════════════════ #
@@ -23,21 +36,13 @@ def truck_interior(screen):
 	hovered_continue = False
 
 
-
-	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
-	font = pygame.font.Font("assets/arial.ttf", 20)
-	truck_interior_dialogue_1 = "Even though you never met this man, despite a nagging feeling that you've seen him before, you decide it's perfectly safe and drive your car up the loading ramps and into the truck's interior. It's only then that you wonder how you would be able to pay for any shiny new parts when you haven't been in any races, yet, to build up some cash. It is also at this time that you noticed that the mysterious man is now standing in front of your car."
-
-	truck_interior_dialogue_2 = "\"Save up, then we can talk!\", says the seller. \"But! I'll give you a one-time discount, driver! Because I know you're good for it.\" You can almost sense a grin hidden behind his face mask as you look over the selection of parts he has to offer."
-
-
-
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ IMAGES ════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	""" Blue Civic inside truck container """
-	truck_interior = pygame.image.load("assets/truck_interior_and_civic.png")
-	truck_interior_rect = truck_interior.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
+	# Set margin from the left side and the gap between images
+	left_margin = 50
+	top_margin = 50
+	gap = 20
+
 
 	""" 'Continue' arrow button """
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
@@ -56,17 +61,43 @@ def truck_interior(screen):
 
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
+					for part in parts:
+							part_rect = part["image"].get_rect(topleft=(left_margin, parts.index(part) * (part["image"].get_height() + gap) + top_margin))
+							if is_hovered(part_rect):
+								if player_money >= part["cost"]:
+									player_money -= part["cost"]
+									print(f"Bought {part['name']} for ${part['cost']}")
+								else:
+									print(f"Not enough money to buy {part['name']}")
 					if is_hovered(continue_arrow_rect):
-						first_time_sale.parts_sale(screen)
+						pass
 
 
 		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
-		text_wrap(screen, truck_interior_dialogue_1, (screen.get_width() // 10, screen.get_height() // 20), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		text_wrap(screen, truck_interior_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
-		screen.blit(truck_interior, truck_interior_rect.topleft)
+		# Display parts and costs
+		font = pygame.font.SysFont('Arial', 24)
+		y_offset = top_margin
+		for part in parts:
+			# Blit part image
+			part_rect = part["image"].get_rect(topleft=(left_margin, y_offset))
+			screen.blit(part["image"], part_rect.topleft)
+
+			# Blit part name and cost
+			text_surface = font.render(f"{part['name']} - ${part['cost']}", True, (255, 255, 255))
+			text_rect = text_surface.get_rect(topleft=(left_margin + part_rect.width + 10, y_offset + part_rect.height // 4))
+			screen.blit(text_surface, text_rect)
+
+			y_offset += part_rect.height + gap
+		
+		# Display player's money
+		money_surface = font.render(f"Player's money: ${player_money}", True, (255, 255, 255))
+		money_rect = money_surface.get_rect(topright=(screen.get_width() - left_margin, top_margin))
+		screen.blit(money_surface, money_rect)
+
+
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
