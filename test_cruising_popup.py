@@ -61,16 +61,16 @@ def test_cruising(screen):
 	event_probability = 0.5											# 50% chance of event being `True`
 	last_event_check = pygame.time.get_ticks()
 
-	# Define pop-up window
+	# Create pop-up window and define its position on screen
 	button_rect = pygame.Rect(screen.get_width() // 2 - 50, screen.get_height() // 2 + 20, 100, 30)
 
-	# Define border properties
+	# Define pop-up window border properties
 	border_color = (255, 255, 255)									# White border
 	border_thickness = 5
 
-	# Load pop-up image
-	popup_image = pygame.image.load("assets/merchant_bust.png")
-	popup_image_rect = popup_image.get_rect(center=(150, 75))		# Center it within the pop-up surface
+	# Display image within pop-up
+	popup_image = pygame.image.load("assets/merchant_bust.png")		# Define image
+	popup_image_rect = popup_image.get_rect(center=(150, 75))		# Center it within the pop-up window
 
 
 
