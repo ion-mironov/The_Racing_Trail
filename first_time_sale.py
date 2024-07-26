@@ -26,43 +26,6 @@ player_money = 600
 
 
 # ═══════════════════════════════════════════════════════════════════════════ #
-# ═══ POP-UP WINDOW ═════════════════════════════════════════════════════════ #
-def draw_popup(screen, message):
-	popup_width, popup_height = 300, 150
-	popup_surface = pygame.Surface((popup_width, popup_height))
-	popup_surface.fill((255, 0, 0))  # Red background for the popup
-	popup_rect = popup_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
-
-	# Draw border
-	border_thickness = 5
-	border_color = (255, 255, 255)
-	border_rect = pygame.Rect(
-		popup_rect.left - border_thickness,
-		popup_rect.top - border_thickness,
-		popup_width + 2 * border_thickness,
-		popup_height + 2 * border_thickness
-	)
-	pygame.draw.rect(screen, border_color, border_rect)
-	screen.blit(popup_surface, popup_rect)
-
-	# Draw message
-	font = pygame.font.SysFont('Arial', 24)
-	text_surface = font.render(message, True, (255, 255, 255))
-	text_rect = text_surface.get_rect(center=(popup_rect.centerx, popup_rect.centery - 20))
-	screen.blit(text_surface, text_rect)
-
-	# Draw button
-	button_rect = pygame.Rect(popup_rect.centerx - 50, popup_rect.centery + 20, 100, 40)
-	pygame.draw.rect(screen, (255, 255, 255), button_rect)
-	button_text = font.render("Close", True, (0, 0, 0))
-	button_text_rect = button_text.get_rect(center=button_rect.center)
-	screen.blit(button_text, button_text_rect)
-
-	return button_rect
-
-
-
-# ═══════════════════════════════════════════════════════════════════════════ #
 # ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
 def parts_sale(screen):
 	global player_money			# Declare `player_money` as global
