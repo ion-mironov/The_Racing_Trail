@@ -103,13 +103,13 @@ def parts_sale(screen):
 			y_offset += part_rect.height + gap
 
 
-		# ┌─── Player's money and car performance values ──────────────────────────────────────────────────────────────────────┐
+		# ┌─── Player's money and car values ─────────────────────────────────────────────────────────────────────────────────┐
 		label_color = (255, 165, 0)		# Orange
 		value_color = (255, 255, 255)	# White
 
 		money_label_surface = font.render("Wallet:", True, label_color)
-		money_value_surface = font.render(f"${player_instance.money}", True, value_color)
 		money_label_rect = money_label_surface.get_rect(topright=(screen.get_width() - left_margin - 100, top_margin))
+		money_value_surface = font.render(f"${player_instance.money}", True, value_color)
 		money_value_rect = money_value_surface.get_rect(topleft=(money_label_rect.topright[0] + 5, top_margin))
 		screen.blit(money_label_surface, money_label_rect)
 		screen.blit(money_value_surface, money_value_rect)
@@ -127,7 +127,7 @@ def parts_sale(screen):
 		torque_value_rect = torque_value_surface.get_rect(topleft=(torque_label_rect.topright[0] + 5, top_margin + 60))
 		screen.blit(torque_label_surface, torque_label_rect)
 		screen.blit(torque_value_surface, torque_value_rect)
-		# └─── Player's money and car performance values ──────────────────────────────────────────────────────────────────────┘
+		# └─── Player's money and car values ─────────────────────────────────────────────────────────────────────────────────┘
 
 
 		# Display pop-up if needed
