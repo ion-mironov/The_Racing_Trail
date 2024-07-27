@@ -27,7 +27,7 @@ def merchant_truck(screen):
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.Font("assets/arial.ttf", 20)
-	truck_encounter_dialogue_1 = "After a few miles, you come across a truck with a strangely familiar logo on its side and an equally strangely familiar masked occupant in the driver's seat. As you get closer, the back door of the truck opens up and you see a slew of car parts and mechanic's tools. You then notice that the driver, wearing a long, thick leather coat and purple mask, is now suddenly outside your window."
+	truck_encounter_dialogue_1 = "After a few miles, you come across a truck with a strangely familiar logo on its side and an equally strangely familiar masked occupant in the driver's seat. As you get closer, the back door of the truck opens up and you see a slew of car parts and mechanic's tools. You then notice that the driver, wearing a long, thick leather coat and a purple bandana mask covering the lower half of his face, is now suddenly outside your window."
 
 	truck_encounter_dialogue_2 = "\"Welcome!\", he says in a hard-to-pinpoint-but-familiar accent. \"Come inside! Got a selection of good things on sale, driver!\""
 

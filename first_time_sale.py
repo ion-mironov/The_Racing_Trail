@@ -3,6 +3,7 @@ import pygame
 
 from game_functions import *
 from parameters import *
+from player_data import player_instance
 
 
 
@@ -14,21 +15,17 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 # Define parts data
 parts = [
-	{"name": "Brakes", "cost": 200, "image": pygame.image.load("assets/brakes.png")},
-	{"name": "Engine", "cost": 1000, "image": pygame.image.load("assets/engine.png")},
-	{"name": "Exhaust", "cost": 500, "image": pygame.image.load("assets/muffler.png")},
-	{"name": "Tires", "cost": 450, "image": pygame.image.load("assets/wheels.png")},
+	{"name": "Brakes", "cost": 200, "image": pygame.image.load("assets/brakes.png"), "hp_increase": 0, "torque_increase": 0},
+	{"name": "Engine", "cost": 1000, "image": pygame.image.load("assets/engine.png"), "hp_increase": 60, "torque_increase": 56},
+	{"name": "Exhaust", "cost": 500, "image": pygame.image.load("assets/muffler.png"), "hp_increase": 10, "torque_increase": 10},
+	{"name": "Tires", "cost": 450, "image": pygame.image.load("assets/wheels.png"), "hp_increase": 0, "torque_increase": 0},
 ]
-
-# Player's money
-player_money = 600
 
 
 
 # ═══════════════════════════════════════════════════════════════════════════ #
 # ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
 def parts_sale(screen):
-	global player_money			# Declare `player_money` as global
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ SHIMMER FUNCTION ══════════════════════════════════════════════════════════════════════════════════════════════ #
@@ -67,16 +64,20 @@ def parts_sale(screen):
 					if popup_visible:
 						if button_rect and button_rect.collidepoint(event.pos):
 							popup_visible = False
+
 					else:
 						for part in parts:
 							part_rect = part["image"].get_rect(topleft=(left_margin, parts.index(part) * (part["image"].get_height() + gap) + top_margin))
 							if part_rect.collidepoint(event.pos):
-								if player_money >= part["cost"]:
-									player_money -= part["cost"]
-									print(f"Bought {part['name']} for ${part['cost']}")
+								if player_instance.subtract_money(part["cost"]):
+									player_instance.update_car_performance(part["hp_increase"], part["torque_increase"])
+									print(f"Bought {part["name"]} for ${part["cost"]}")
+									print(f"New HP: {player_instance.car_hp}, New Torque: {player_instance.car_torque}")
+
 								else:
-									popup_message = "Not enough money to buy this, driver!"
+									popup_message = "Not enough money, driver!"
 									popup_visible = True
+
 						if is_hovered(continue_arrow_rect):
 							pass
 
@@ -100,17 +101,38 @@ def parts_sale(screen):
 			screen.blit(text_surface, text_rect)
 
 			y_offset += part_rect.height + gap
-		
-		# Display player's money on the screen
-		money_surface = font.render(f"Player's money: ${player_money}", True, (255, 255, 255))
-		money_rect = money_surface.get_rect(topright=(screen.get_width() - left_margin, top_margin))
-		screen.blit(money_surface, money_rect)
+
+
+		# ┌─── Player's money and car performance values ──────────────────────────────────────────────────────────────────────┐
+		label_color = (255, 165, 0)		# Orange
+		value_color = (255, 255, 255)	# White
+
+		money_label_surface = font.render("Wallet:", True, label_color)
+		money_value_surface = font.render(f"${player_instance.money}", True, value_color)
+		money_label_rect = money_label_surface.get_rect(topright=(screen.get_width() - left_margin - 100, top_margin))
+		money_value_rect = money_value_surface.get_rect(topleft=(money_label_rect.topright[0] + 5, top_margin))
+		screen.blit(money_label_surface, money_label_rect)
+		screen.blit(money_value_surface, money_value_rect)
+
+		hp_label_surface = font.render("HP:", True, label_color)
+		hp_value_surface = font.render(f"{player_instance.car_hp}", True, value_color)
+		hp_label_rect = hp_label_surface.get_rect(topright=(screen.get_width() - left_margin - 100, top_margin + 30))
+		hp_value_rect = hp_value_surface.get_rect(topleft=(hp_label_rect.topright[0] + 5, top_margin + 30))
+		screen.blit(hp_label_surface, hp_label_rect)
+		screen.blit(hp_value_surface, hp_value_rect)
+
+		torque_label_surface = font.render("Torque:", True, label_color)
+		torque_value_surface = font.render(f"{player_instance.car_torque}", True, value_color)
+		torque_label_rect = torque_label_surface.get_rect(topright=(screen.get_width() - left_margin - 100, top_margin + 60))
+		torque_value_rect = torque_value_surface.get_rect(topleft=(torque_label_rect.topright[0] + 5, top_margin + 60))
+		screen.blit(torque_label_surface, torque_label_rect)
+		screen.blit(torque_value_surface, torque_value_rect)
+		# └─── Player's money and car performance values ──────────────────────────────────────────────────────────────────────┘
+
 
 		# Display pop-up if needed
 		if popup_visible:
 			button_rect = draw_popup(screen, popup_message)
-
-
 		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
 

@@ -27,9 +27,9 @@ def truck_interior(screen):
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.Font("assets/arial.ttf", 20)
-	truck_interior_dialogue_1 = "Even though you never met this man, despite a nagging feeling that you've seen him before, you decide it's perfectly safe and drive your car up the loading ramps and into the truck's interior. It's only then that you wonder how you would be able to pay for any shiny new parts when you haven't been in any races, yet, to build up some cash. It is also at this time that you noticed that the mysterious man is now standing in front of your car."
+	truck_interior_dialogue_1 = "Even though you've never met this man, despite a nagging feeling that you have seen him before, you decide it's perfectly safe and drive your car up the loading ramps and into the truck's interior. It's only then that you noticed that the mysterious man is now standing in front of your car. How'd he get inside so fast without you noticing?"
 
-	truck_interior_dialogue_2 = "\"Save up, then we can talk!\", says the seller. \"But! I'll give you a one-time discount, driver! Because I know you're good for it.\" You can almost sense a grin hidden behind his face mask as you look over the selection of parts he has to offer."
+	truck_interior_dialogue_2 = "\"Let's do some business then, eh!\", says the seller. \"I reserved some items, just for you! My other customers don't know about these, heh heh heh.\" You can almost sense a grin hidden behind his mask as you look over the selection of parts he has to offer."
 
 
 
