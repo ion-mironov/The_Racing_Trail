@@ -82,7 +82,7 @@ def parts_sale(screen):
 							pass
 
 
-		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
+		# ┌─── ▼ Display all necessary images and text ▼ ─────────────────────────────────────────────────────────────────────────────────────────┐
 		screen.fill((0, 0, 0))
 
 
@@ -133,11 +133,11 @@ def parts_sale(screen):
 		# Display pop-up if needed
 		if popup_visible:
 			button_rect = draw_popup(screen, popup_message)
-		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
+		# └─── ▲ Display all necessary images and text ▲ ─────────────────────────────────────────────────────────────────────────────────────────┘
 
 
 
-		# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
+		# ┌─── ▼ 'Continue' arrow shimmer effect ▼ ───────────────────────────────────┐
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 		cursor_changed = False
 
@@ -158,7 +158,7 @@ def parts_sale(screen):
 
 		if not cursor_changed:
 			pygame.mouse.set_cursor(arrow_cursor)
-		# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
+		# └─── ▲ 'Continue' arrow shimmer effect ▲ ───────────────────────────────────┘
 
 
 		pygame.display.flip()

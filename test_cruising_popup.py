@@ -95,12 +95,12 @@ def test_cruising(screen):
 					if is_hovered(continue_arrow_rect):
 						pass
 
-					if popup_visible and button_rect.collidepoint(event.pos):	# If pop-up is visible and button is clicked on
-						popup_visible = False									# Close the pop-up
-						last_event_check = pygame.time.get_ticks()				# Reset the event check timer
+					if popup_visible and button_rect.collidepoint(event.pos):	# If pop-up is visible & button is clicked
+						popup_visible = False									# Close pop-up
+						last_event_check = pygame.time.get_ticks()				# Reset event check timer
 
 
-		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
+		# ┌─── ▼ Display all necessary images and text ▼ ─────────────────┐
 		screen.fill((0, 0, 0))
 
 		now = pygame.time.get_ticks()
@@ -110,17 +110,15 @@ def test_cruising(screen):
 
 		screen.blit(frames[current_frame], civic_cruising_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
-		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
+		# └─── ▲ Display all necessary images and text ▲ ─────────────────┘
 
 
-		# ─── ▼ Pop-up window and its parameters ▼ ────────────────────────────────── #
-		# Randomly show the pop-up
-		if not popup_visible and now - last_event_check > 2000:			# Checks if 5 seconds have passed since the last event check and if no pop-up is currently visible
+		# ┌─── ▼ Pop-up window and its parameters ▼ ──────────────────────────────────────────────────────────────┐
+		if not popup_visible and now - last_event_check > 2000:			# Checks if 2 seconds have passed since the last event check and if no pop-up is currently visible
 			last_event_check = now										# Updates to current time; resets timer for checking the next event from this point
 			if random.random() < event_probability:						# Random float value between 0 and 1, compares to 0.5 defined earlier
 				popup_visible = True									# Display a pop-up window if above condition is met
 
-		# Display pop-up window
 		if popup_visible:
 			popup_text = "What're ya buyin'?"
 			popup_width, popup_height = 300, 150
@@ -150,11 +148,11 @@ def test_cruising(screen):
 			button_text = font.render("Close", True, BLACK)
 			button_text_rect = button_text.get_rect(center=button_rect.center)
 			screen.blit(button_text, button_text_rect)
-		# ─── ▲ Pop-up window and its parameters ▲ ────────────────────────────────── #
+		# └─── ▲ Pop-up window and its parameters ▲ ──────────────────────────────────────────────────────────────┘
 
 
 
-		# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
+		# ┌─── ▼ 'Continue' arrow shimmer effect ▼ ───────────────────────────────────┐
 		cursor_changed = False
 
 		if is_hovered(continue_arrow_rect):
@@ -174,7 +172,7 @@ def test_cruising(screen):
 
 		if not cursor_changed:
 			pygame.mouse.set_cursor(arrow_cursor)
-		# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
+		# └─── ▲ 'Continue' arrow shimmer effect ▲ ───────────────────────────────────┘
 
 
 		pygame.display.flip()

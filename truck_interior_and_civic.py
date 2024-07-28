@@ -60,7 +60,7 @@ def truck_interior(screen):
 						first_time_sale.parts_sale(screen)
 
 
-		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
+		# ┌─── ▼ Display all necessary images and text ▼ ─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 		screen.fill((0, 0, 0))
 
 		text_wrap(screen, truck_interior_dialogue_1, (screen.get_width() // 10, screen.get_height() // 20), font, WHITE, screen.get_width() - screen.get_width() // 5)
@@ -68,11 +68,11 @@ def truck_interior(screen):
 
 		screen.blit(truck_interior, truck_interior_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
-		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
+		# └─── ▲ Display all necessary images and text ▲ ─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 
 
-		# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
+		# ┌─── ▼ 'Continue' arrow shimmer effect ▼ ───────────────────────────────────┐
 		cursor_changed = False
 
 		if is_hovered(continue_arrow_rect):
@@ -92,7 +92,7 @@ def truck_interior(screen):
 
 		if not cursor_changed:
 			pygame.mouse.set_cursor(arrow_cursor)
-		# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
+		# └─── ▲ 'Continue' arrow shimmer effect ▲ ───────────────────────────────────┘
 
 
 		pygame.display.flip()
