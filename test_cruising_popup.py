@@ -3,7 +3,7 @@ import random
 from sys import exit
 import pygame
 
-from game_functions import *
+from ui_elements import *
 from parameters import *
 import current_progress
 
