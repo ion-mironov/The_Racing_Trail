@@ -1,5 +1,7 @@
 import pygame
 
+
+
 # ═══════════════════════════════════════════════════════════════════════════ #
 # ═════ TEXT WRAP FUNCTION  ═════════════════════════════════════════════════ #
 def text_wrap(screen, text, position, font, color, max_width):
@@ -20,7 +22,6 @@ def text_wrap(screen, text, position, font, color, max_width):
 		text_surface = font.render(line, True, color)
 		text_rect = text_surface.get_rect(topleft=(position[0], position[1] + i * font.get_linesize()))
 		screen.blit(text_surface, text_rect)
-
 
 
 

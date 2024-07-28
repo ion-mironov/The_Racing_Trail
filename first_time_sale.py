@@ -13,7 +13,7 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 
-# Define parts data
+# Define part data with relevant HP and torque increases
 parts = [
 	{"name": "Brakes", "cost": 200, "image": pygame.image.load("assets/brakes.png"), "hp_increase": 0, "torque_increase": 0},
 	{"name": "Engine", "cost": 1000, "image": pygame.image.load("assets/engine.png"), "hp_increase": 60, "torque_increase": 56},
@@ -66,17 +66,20 @@ def parts_sale(screen):
 							popup_visible = False
 
 					else:
-						for part in parts:
+						for part in parts[:]:
 							part_rect = part["image"].get_rect(topleft=(left_margin, parts.index(part) * (part["image"].get_height() + gap) + top_margin))
 							if part_rect.collidepoint(event.pos):
 								if player_instance.subtract_money(part["cost"]):
 									player_instance.update_car_performance(part["hp_increase"], part["torque_increase"])
 									print(f"Bought {part["name"]} for ${part["cost"]}")
 									print(f"New HP: {player_instance.car_hp}, New Torque: {player_instance.car_torque}")
+									parts.remove(part)			# Remove part from list once purchased
+									break  # Exit the loop once a part is purchased
 
 								else:
 									popup_message = "Not enough money, driver!"
 									popup_visible = True
+									break  # Exit the loop if popup is shown
 
 						if is_hovered(continue_arrow_rect):
 							pass
