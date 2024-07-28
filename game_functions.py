@@ -29,7 +29,7 @@ def text_wrap(screen, text, position, font, color, max_width):
 def draw_popup(screen, message):
 	popup_width, popup_height = 300, 150
 	popup_surface = pygame.Surface((popup_width, popup_height))
-	popup_surface.fill((255, 0, 0))  # Red background for the popup
+	popup_surface.fill((13, 17, 23))
 	popup_rect = popup_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
 
 	# Draw border
