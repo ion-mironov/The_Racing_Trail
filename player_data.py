@@ -1,7 +1,6 @@
 class Player:
 	def __init__(self):
 		self.money = 1000		# Initial money
-		self.car_braking = 140	# Initial braking distance in ft from 60 mph
 		self.car_hp = 166		# Initial horsepower
 		self.car_torque = 159	# Initial torque
 
@@ -14,8 +13,7 @@ class Player:
 			return True
 		return False
 
-	def update_car_performance(self, braking_decrease, hp_increase, torque_increase):
-		self.car_braking -= braking_decrease
+	def update_car_performance(self, hp_increase, torque_increase):
 		self.car_hp += hp_increase
 		self.car_torque += torque_increase
 
