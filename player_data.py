@@ -4,7 +4,6 @@ class Player:
 		self.car_braking = 140	# Initial braking distance in ft from 60 mph
 		self.car_hp = 166		# Initial horsepower
 		self.car_torque = 159	# Initial torque
-		self.car_accel = 10		# Initial 0-60 time in seconds
 
 	def add_money(self, amount):
 		self.money += amount
@@ -15,11 +14,10 @@ class Player:
 			return True
 		return False
 
-	def update_car_performance(self, braking_distance, hp_increase, torque_increase, accel_decrease):
-		self.car_braking -= braking_distance
+	def update_car_performance(self, braking_decrease, hp_increase, torque_increase):
+		self.car_braking -= braking_decrease
 		self.car_hp += hp_increase
 		self.car_torque += torque_increase
-		self.car_accel -= accel_decrease
 
 
 # Create a global player instance
