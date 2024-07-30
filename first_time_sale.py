@@ -15,10 +15,8 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 # Dictionary defining part data with relevant player_data.py values
 parts = [
-	{"name": "Sport Brakes", "cost": 200, "image": pygame.image.load("assets/brakes.png"), "braking_decrease": 1, "hp_increase": 0, "torque_increase": 0},
-	{"name": "Engine Tune 1", "cost": 1000, "image": pygame.image.load("assets/engine.png"), "braking_decrease": 0, "hp_increase": 60, "torque_increase": 56},
-	{"name": "Sport Exhaust", "cost": 500, "image": pygame.image.load("assets/muffler.png"), "braking_decrease": 0, "hp_increase": 10, "torque_increase": 10},
-	{"name": "Sport Tires", "cost": 450, "image": pygame.image.load("assets/wheels.png"), "braking_decrease": 1, "hp_increase": 0, "torque_increase": 0},
+	{"name": "Engine Tune 1", "cost": 1000, "image": pygame.image.load("assets/engine.png"), "hp_increase": 40, "torque_increase": 36},
+	{"name": "Sport Exhaust", "cost": 500, "image": pygame.image.load("assets/muffler.png"), "hp_increase": 12, "torque_increase": 10},
 ]
 
 
@@ -28,21 +26,18 @@ parts = [
 def parts_sale(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ SHIMMER FUNCTION ══════════════════════════════════════════════════════════════════════════════════════════════ #
-	shimmer_progress_continue = 0
-	hovered_continue = False
+	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
+	font = pygame.font.Font("assets/arial.ttf", 20)
+	first_sale_dialogue_1 = "You decide that the only parts you want to focus on are anything that can improve your engine's performance. With that in mind, you have your eyes set on an engine tune or sport exhaust system, but you only have enough cash to purchase one. Which will it be?"
+
+	first_sale_dialogue_2 = "The engine tune will bump your HP to 206 and your torque to 195 lb-ft, but will leave you penniless. The exhaust system will increase your HP to 178 and your torque to 169 lb-ft, but you'll have money left over. Choose wisely, because you cannot go back once you make your selection!"
 
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ IMAGES ════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	top_margin = 50				# Set gap from the top to first image
+	top_margin = 300			# Set gap from the top to first image
 	left_margin = 50			# Set gap from left side of images
 	gap = 20					# Set gap for in-between images
-
-
-	""" 'Continue' arrow button """
-	continue_arrow = pygame.image.load("assets/continue_arrow.png")
-	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
 	popup_visible = False
 	popup_message = ""
@@ -71,26 +66,22 @@ def parts_sale(screen):
 							if part_rect.collidepoint(event.pos):
 								if player_instance.subtract_money(part["cost"]):
 									player_instance.update_car_performance(part["hp_increase"], part["torque_increase"])
-									print(f"Bought {part["name"]} for ${part["cost"]}")
-									print(f"New HP: {player_instance.car_hp}, New Torque: {player_instance.car_torque}")
-									parts.remove(part)			# Remove part from list once purchased
-									break						# Exit the loop once a part is purchased (prevents double-purchase bug)
-
-								else:
-									popup_message = "Not enough money, driver!"
+									popup_message = "Heh heh heh, thank you!"
 									popup_visible = True
-									break						# Exit the loop if popup is shown
+									parts.remove(part)			# Remove part from list once bought
+									break
 
-						if is_hovered(continue_arrow_rect):
-							pass
 
 
 		# ┌─── ▼ Display all necessary images and text ▼ ─────────────────────────────────────────────────────────────────────────────────────────┐
 		screen.fill((0, 0, 0))
 
+		text_wrap(screen, first_sale_dialogue_1, (screen.get_width() // 10, screen.get_height() // 15), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, first_sale_dialogue_2, (screen.get_width() // 10, screen.get_height() // 4), font, WHITE, screen.get_width() - screen.get_width() // 5)
+
 
 		# Display parts and costs
-		font = pygame.font.SysFont('Arial', 24)
+		font = pygame.font.Font("assets/arial.ttf", 20)
 		y_offset = top_margin
 		for part in parts:
 
@@ -137,31 +128,6 @@ def parts_sale(screen):
 		if popup_visible:
 			button_rect = draw_popup(screen, popup_message)
 		# └─── ▲ Display all necessary images and text ▲ ─────────────────────────────────────────────────────────────────────────────────────────┘
-
-
-
-		# ┌─── ▼ 'Continue' arrow shimmer effect ▼ ───────────────────────────────────┐
-		screen.blit(continue_arrow, continue_arrow_rect.topleft)
-		cursor_changed = False
-
-		if is_hovered(continue_arrow_rect):
-			if not hovered_continue:
-				shimmer_progress_continue = 0
-				hovered_continue = True
-
-			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.015
-				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
-
-			pygame.mouse.set_cursor(hand_cursor)
-			cursor_changed = True
-
-		else:
-			hovered_continue = False
-
-		if not cursor_changed:
-			pygame.mouse.set_cursor(arrow_cursor)
-		# └─── ▲ 'Continue' arrow shimmer effect ▲ ───────────────────────────────────┘
 
 
 		pygame.display.flip()

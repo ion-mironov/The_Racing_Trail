@@ -64,7 +64,7 @@ def truck_interior(screen):
 		screen.fill((0, 0, 0))
 
 		text_wrap(screen, truck_interior_dialogue_1, (screen.get_width() // 10, screen.get_height() // 20), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		text_wrap(screen, truck_interior_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		text_wrap(screen, truck_interior_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3.5), font, WHITE, screen.get_width() - screen.get_width() // 5)
 
 		screen.blit(truck_interior, truck_interior_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
