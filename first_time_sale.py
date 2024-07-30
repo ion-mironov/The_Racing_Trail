@@ -15,10 +15,10 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 # Define part data with relevant HP and torque increases
 parts = [
-	{"name": "Brakes", "cost": 200, "image": pygame.image.load("assets/brakes.png"), "hp_increase": 0, "torque_increase": 0},
-	{"name": "Engine", "cost": 1000, "image": pygame.image.load("assets/engine.png"), "hp_increase": 60, "torque_increase": 56},
-	{"name": "Exhaust", "cost": 500, "image": pygame.image.load("assets/muffler.png"), "hp_increase": 10, "torque_increase": 10},
-	{"name": "Tires", "cost": 450, "image": pygame.image.load("assets/wheels.png"), "hp_increase": 0, "torque_increase": 0},
+	{"name": "Sport Brakes", "cost": 200, "image": pygame.image.load("assets/brakes.png"), "hp_increase": 0, "torque_increase": 0},
+	{"name": "Engine Tune 1", "cost": 1000, "image": pygame.image.load("assets/engine.png"), "hp_increase": 60, "torque_increase": 56},
+	{"name": "Sport Exhaust", "cost": 500, "image": pygame.image.load("assets/muffler.png"), "hp_increase": 10, "torque_increase": 10},
+	{"name": "Sport Tires", "cost": 450, "image": pygame.image.load("assets/wheels.png"), "hp_increase": 0, "torque_increase": 0},
 ]
 
 
@@ -74,12 +74,12 @@ def parts_sale(screen):
 									print(f"Bought {part["name"]} for ${part["cost"]}")
 									print(f"New HP: {player_instance.car_hp}, New Torque: {player_instance.car_torque}")
 									parts.remove(part)			# Remove part from list once purchased
-									break  # Exit the loop once a part is purchased
+									break						# Exit the loop once a part is purchased (prevents double-purchase bug)
 
 								else:
 									popup_message = "Not enough money, driver!"
 									popup_visible = True
-									break  # Exit the loop if popup is shown
+									break						# Exit the loop if popup is shown
 
 						if is_hovered(continue_arrow_rect):
 							pass
