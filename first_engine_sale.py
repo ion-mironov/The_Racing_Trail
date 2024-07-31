@@ -1,9 +1,9 @@
+import os
 from sys import exit
 import pygame
 
 from ui_elements import *
 from parameters import *
-import first_time_sale
 
 
 
@@ -14,8 +14,19 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 
 # ═══════════════════════════════════════════════════════════════════════════ #
+# ═══ GIF ANIMATION FUNCTION ════════════════════════════════════════════════ #
+def load_frames(folder, prefix):
+	frames = []
+	for filename in sorted(os.listdir(folder)):
+		if filename.startswith(prefix):
+			img = pygame.image.load(os.path.join(folder, filename))
+			frames.append(img)
+	return frames
+
+
+# ═══════════════════════════════════════════════════════════════════════════ #
 # ═══ LEVEL IMAGES, DIALOGUE TEXT, AND GAME LOOP ════════════════════════════ #
-def truck_interior(screen):
+def start_tuning(screen):
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ SHIMMER FUNCTION ══════════════════════════════════════════════════════════════════════════════════════════════ #
@@ -27,19 +38,28 @@ def truck_interior(screen):
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ DIALOGUE TEXT ═════════════════════════════════════════════════════════════════════════════════════════════════ #
 	font = pygame.font.Font("assets/arial.ttf", 20)
-	truck_interior_dialogue_1 = "Even though you've never met this man, despite a nagging feeling that you have seen him before, you decide it's perfectly safe and drive your car up the loading ramps and into the truck's interior. It's only then that you noticed that the mysterious man is now standing in front of your car. How'd he get inside so fast without you noticing?"
-
-	truck_interior_dialogue_2 = "\"Let's do some business then, eh!\", says the seller. \"I reserved some items, just for you! My other customers don't know about these, heh heh heh.\" You can almost sense a grin hidden behind his mask as you look over the selection of parts he has to offer."
+	cruising_text = "This is text for having purchased the engine tune."
 
 
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	# ═══ IMAGES ════════════════════════════════════════════════════════════════════════════════════════════════════════ #
-	""" Blue Civic inside truck container """
-	truck_interior = pygame.image.load("assets/truck_interior_and_civic.png")
-	truck_interior_rect = truck_interior.get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.45))
+	# ═══ ANIMATION ═════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	""" Define image frames for animation """
+	frames = load_frames("assets/engine_fix/", "frame_")
+	frame_count = len(frames)
+	current_frame = 0
 
-	""" 'Continue' arrow button """
+	""" Timing for frame updates """
+	frame_delay = 100   # milliseconds before displaying next frame in sequence
+	last_update = pygame.time.get_ticks()
+
+	""" Get rect from first image frame to position animation """
+	civic_cruising_rect = frames[0].get_rect(center=(screen.get_width() // 2, screen.get_height() // 1.5))
+
+
+
+	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
+	# ═══ 'CONTINUE' ARROW ══════════════════════════════════════════════════════════════════════════════════════════════ #
 	continue_arrow = pygame.image.load("assets/continue_arrow.png")
 	continue_arrow_rect = continue_arrow.get_rect(bottomright=(screen.get_width() // 1.005, screen.get_height() // 1.01))
 
@@ -53,26 +73,29 @@ def truck_interior(screen):
 			if event.type == pygame.QUIT:
 				pygame.quit()
 				exit()
-
+			
+			# Continue arrow button
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if is_hovered(continue_arrow_rect):
-						first_time_sale.parts_sale(screen)
+						pass
 
-
-	# ┌─── ▼ Display all necessary images and text ▼ ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
 		screen.fill((0, 0, 0))
 
-		text_wrap(screen, truck_interior_dialogue_1, (screen.get_width() // 10, screen.get_height() // 20), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		text_wrap(screen, truck_interior_dialogue_2, (screen.get_width() // 10, screen.get_height() // 3.5), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		now = pygame.time.get_ticks()
+		if now - last_update > frame_delay:
+			current_frame = (current_frame + 1) % frame_count
+			last_update = now
 
-		screen.blit(truck_interior, truck_interior_rect.topleft)
+		screen.blit(frames[current_frame], civic_cruising_rect.topleft)
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
-	# └─── ▲ Display all necessary images and text ▲ ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+		text_wrap(screen, cruising_text, (screen.get_width() // 10, screen.get_height() // 5), font, WHITE, screen.get_width() - screen.get_width() // 5)
+		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
 
 
-
-	# ┌─── ▼ 'Continue' arrow shimmer effect ▼ ──────────────────────────────────────┐
+		# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
 		cursor_changed = False
 
 		if is_hovered(continue_arrow_rect):
@@ -81,7 +104,7 @@ def truck_interior(screen):
 				hovered_continue = True
 
 			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.015
+				shimmer_progress_continue += 0.006
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
 
 			pygame.mouse.set_cursor(hand_cursor)
@@ -92,7 +115,7 @@ def truck_interior(screen):
 
 		if not cursor_changed:
 			pygame.mouse.set_cursor(arrow_cursor)
-	# └─── ▲ 'Continue' arrow shimmer effect ▲ ──────────────────────────────────────┘
+		# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
 
 
 		pygame.display.flip()

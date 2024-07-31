@@ -4,6 +4,8 @@ import pygame
 from ui_elements import *
 from parameters import *
 from player_data import player_instance
+import first_engine_sale
+import first_exhaust_sale
 
 
 
@@ -15,8 +17,8 @@ hand_cursor = pygame.SYSTEM_CURSOR_HAND
 
 # Dictionary defining part data with relevant player_data.py values
 parts = [
-	{"name": "Engine Tune 1", "cost": 1000, "image": pygame.image.load("assets/engine.png"), "hp_increase": 40, "torque_increase": 36},
-	{"name": "Sport Exhaust", "cost": 500, "image": pygame.image.load("assets/muffler.png"), "hp_increase": 12, "torque_increase": 10},
+	{"name": "Engine Tune 1", "cost": 1000, "image": pygame.image.load("assets/engine.png"), "hp_increase": 40, "torque_increase": 36, "next_level": first_engine_sale},
+	{"name": "Sport Exhaust", "cost": 500, "image": pygame.image.load("assets/muffler.png"), "hp_increase": 12, "torque_increase": 10, "next_level": first_exhaust_sale}
 ]
 
 
@@ -42,13 +44,14 @@ def parts_sale(screen):
 	popup_visible = False
 	popup_message = ""
 	button_rect = None
-
+	next_level = None  # Variable to store the next level
 
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	# ═══ GAME LOOP ═════════════════════════════════════════════════════════════════════════════════════════════════════ #
 	running = True
 	while running:
+		cursor_changed = False
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				pygame.quit()
@@ -59,21 +62,24 @@ def parts_sale(screen):
 					if popup_visible:
 						if button_rect and button_rect.collidepoint(event.pos):
 							popup_visible = False
+							next_level.start_tuning(screen)
 
 					else:
 						for part in parts[:]:
 							part_rect = part["image"].get_rect(topleft=(left_margin, parts.index(part) * (part["image"].get_height() + gap) + top_margin))
 							if part_rect.collidepoint(event.pos):
+								pygame.mouse.set_cursor(hand_cursor)
 								if player_instance.subtract_money(part["cost"]):
 									player_instance.update_car_performance(part["hp_increase"], part["torque_increase"])
 									popup_message = "Heh heh heh, thank you!"
 									popup_visible = True
-									parts.remove(part)			# Remove part from list once bought
+									next_level = part["next_level"]		# Store the next level
+									parts.remove(part)					# Remove part from list once bought
 									break
 
 
 
-		# ┌─── ▼ Display all necessary images and text ▼ ─────────────────────────────────────────────────────────────────────────────────────────┐
+	# ┌─── ▼ Display all necessary images and text ▼ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 		screen.fill((0, 0, 0))
 
 		text_wrap(screen, first_sale_dialogue_1, (screen.get_width() // 10, screen.get_height() // 15), font, WHITE, screen.get_width() - screen.get_width() // 5)
@@ -94,13 +100,19 @@ def parts_sale(screen):
 			text_rect = text_surface.get_rect(topleft=(left_margin + part_rect.width + 10, y_offset + part_rect.height // 4))
 			screen.blit(text_surface, text_rect)
 
+			# Check if mouse is hovering over the part
+			if part_rect.collidepoint(pygame.mouse.get_pos()):
+				pygame.mouse.set_cursor(hand_cursor)
+				cursor_changed = True
+
 			y_offset += part_rect.height + gap
 
 
-		# ┌─── Player's money and car values ─────────────────────────────────────────────────────────────────────────────────┐
+	# ┌─── Player's money and car values ─────────────────────────────────────────────────────────────────────────────────────┐
 		label_color = (255, 165, 0)		# Orange
 		value_color = (255, 255, 255)	# White
 
+		""" Money value """
 		money_label_surface = font.render("Wallet:", True, label_color)
 		money_label_rect = money_label_surface.get_rect(topright=(screen.get_width() - left_margin - 100, top_margin))
 		money_value_surface = font.render(f"${player_instance.money}", True, value_color)
@@ -108,6 +120,7 @@ def parts_sale(screen):
 		screen.blit(money_label_surface, money_label_rect)
 		screen.blit(money_value_surface, money_value_rect)
 
+		""" HP value """
 		hp_label_surface = font.render("HP:", True, label_color)
 		hp_value_surface = font.render(f"{player_instance.car_hp}", True, value_color)
 		hp_label_rect = hp_label_surface.get_rect(topright=(screen.get_width() - left_margin - 100, top_margin + 30))
@@ -115,19 +128,24 @@ def parts_sale(screen):
 		screen.blit(hp_label_surface, hp_label_rect)
 		screen.blit(hp_value_surface, hp_value_rect)
 
+		""" Torque value """
 		torque_label_surface = font.render("Torque:", True, label_color)
 		torque_value_surface = font.render(f"{player_instance.car_torque}", True, value_color)
 		torque_label_rect = torque_label_surface.get_rect(topright=(screen.get_width() - left_margin - 100, top_margin + 60))
 		torque_value_rect = torque_value_surface.get_rect(topleft=(torque_label_rect.topright[0] + 5, top_margin + 60))
 		screen.blit(torque_label_surface, torque_label_rect)
 		screen.blit(torque_value_surface, torque_value_rect)
-		# └─── Player's money and car values ─────────────────────────────────────────────────────────────────────────────────┘
+	# └─── Player's money and car values ─────────────────────────────────────────────────────────────────────────────────────┘
 
 
 		# Display pop-up if needed
 		if popup_visible:
 			button_rect = draw_popup(screen, popup_message)
-		# └─── ▲ Display all necessary images and text ▲ ─────────────────────────────────────────────────────────────────────────────────────────┘
+		
+		# Reset cursor if it hasn't been changed
+		if not cursor_changed:
+			pygame.mouse.set_cursor(arrow_cursor)
+	# └─── ▲ Display all necessary images and text ▲ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 
 		pygame.display.flip()
