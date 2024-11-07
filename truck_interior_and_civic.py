@@ -71,7 +71,6 @@ def truck_interior(screen):
 	# └─── ▲ Display all necessary images and text ▲ ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 
-
 	# ┌─── ▼ 'Continue' arrow shimmer effect ▼ ──────────────────────────────────────┐
 		cursor_changed = False
 

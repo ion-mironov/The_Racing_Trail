@@ -50,7 +50,7 @@ def start_tuning(screen):
 	current_frame = 0
 
 	""" Timing for frame updates """
-	frame_delay = 100   # milliseconds before displaying next frame in sequence
+	frame_delay = 100	# milliseconds before displaying next frame in sequence
 	last_update = pygame.time.get_ticks()
 
 	""" Get rect from first image frame to position animation """
@@ -80,7 +80,8 @@ def start_tuning(screen):
 					if is_hovered(continue_arrow_rect):
 						pass
 
-		# ─── ▼ Display all necessary images and text ▼ ───────────────────────────── #
+
+	# ┌─── Display all necessary images and text ─────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 		screen.fill((0, 0, 0))
 
 		now = pygame.time.get_ticks()
@@ -92,10 +93,10 @@ def start_tuning(screen):
 		screen.blit(continue_arrow, continue_arrow_rect.topleft)
 
 		text_wrap(screen, cruising_text, (screen.get_width() // 10, screen.get_height() // 5), font, WHITE, screen.get_width() - screen.get_width() // 5)
-		# ─── ▲ Display all necessary images and text ▲ ───────────────────────────── #
+	# └─── Display all necessary images and text ─────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 
-		# ─── ▼ 'Continue' arrow shimmer effect ▼ ─────────────────────────────────── #
+	# ┌─── 'Continue' arrow shimmer effect ───────────────────────────────────────────┐
 		cursor_changed = False
 
 		if is_hovered(continue_arrow_rect):
@@ -115,7 +116,7 @@ def start_tuning(screen):
 
 		if not cursor_changed:
 			pygame.mouse.set_cursor(arrow_cursor)
-		# ─── ▲ 'Continue' arrow shimmer effect ▲ ─────────────────────────────────── #
+	# └─── 'Continue' arrow shimmer effect ───────────────────────────────────────────┘
 
 
 		pygame.display.flip()
