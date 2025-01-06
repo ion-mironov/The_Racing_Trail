@@ -44,7 +44,7 @@ def parts_sale(screen):
 	popup_visible = False
 	popup_message = ""
 	button_rect = None
-	next_level = None  # Variable to store the next level
+	next_level = None 			# Variable to store the next level
 
 
 	# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════ #

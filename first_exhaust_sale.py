@@ -105,7 +105,7 @@ def start_tuning(screen):
 				hovered_continue = True
 
 			if shimmer_progress_continue < 1:
-				shimmer_progress_continue += 0.006
+				shimmer_progress_continue += 0.004
 				draw_shimmer(screen, continue_arrow_rect, shimmer_progress_continue)
 
 			pygame.mouse.set_cursor(hand_cursor)
